@@ -1,0 +1,26 @@
+.title {
+    text-align: center;
+    margin: 7%;
+    font-size: 6em;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.card-song {
+    text-align: center;
+    display:inline-block;
+    margin: auto 5% auto 5%;
+    background-color: yellow;
+    transition: transform .2s; /* Animation */
+    /*padding: 50px;*/
+}
+
+.card-song:hover {
+    transform: scale(1.5); /* (150% zoom)*/
+}
+
+.card-align {
+    text-align: center;
+    
+}
+
+

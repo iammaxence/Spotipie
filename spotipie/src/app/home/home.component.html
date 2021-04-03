@@ -1,0 +1,23 @@
+
+<div>
+    <navbar-component></navbar-component>
+    <h1 class="title" @moveTitle >Welcome to SpotiPie</h1>
+
+    <div class="card-align">
+        <div class="card card-song" *ngFor="let song of topsongs" (click)="aboutThisSong()" songBorderCard>
+            <div class="card">
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{song}}</h5>
+                    <p class="card-text">Ecoutes : </p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
