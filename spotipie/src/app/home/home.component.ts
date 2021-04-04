@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 import {
   trigger,
   state,
@@ -22,21 +26,18 @@ import {
   ]
 })
 
+@Injectable()
 export class HomeComponent implements OnInit {
 
-  topsongs: string[]= [
-    "Hwasa",
-    "Booba",
-    "Maes"
-  ];
 
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit(): void {
+    
   }
 
-  aboutThisSong(){
-    console.log("Cick on : aboutThisSong");
-  }
+ 
 
 }
