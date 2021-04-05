@@ -3,12 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
+//Custom Pipe
+import { SplitPipe } from './pipe/split-pipe.component';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { BorderCardDirective } from './border-card.directive';
 import { CardsComponent } from './cards/cards.component';
+import { AllsongsComponent } from './allsongs/allsongs.component';
+import { UploadPageComponent } from './upload-page/upload-page.component';
 
 
 
@@ -18,12 +23,15 @@ import { CardsComponent } from './cards/cards.component';
     HomeComponent,
     NavbarComponent,
     BorderCardDirective,
-    CardsComponent
+    CardsComponent,
+    SplitPipe,
+    AllsongsComponent,
+    UploadPageComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],

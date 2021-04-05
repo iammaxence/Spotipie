@@ -29,13 +29,28 @@ import {
 @Injectable()
 export class HomeComponent implements OnInit {
 
+  //topsongs :{ [key: string]: Number[] } = {};
+  topsongs:any = [];
 
-  constructor() {
+  constructor(private http: HttpClient) {
 
   }
 
   ngOnInit(): void {
-    
+    const headers = new HttpHeaders({
+      'Content-Type' : 'application/json',
+    })
+
+    this.http.get<{ [key: string]: Number[] }>('http://localhost:8080/top?num=3',{headers: headers}).toPromise().then(
+      resp => {
+        var mymap = new Map();
+        for(const i in resp){ 
+          mymap.set(i,resp[i])
+        }  
+        this.topsongs = ([...mymap.entries()].sort((a, b) => b[1] - a[1]));
+        console.log(this.topsongs)
+      }
+    );
   }
 
  
