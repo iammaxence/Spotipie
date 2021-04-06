@@ -11,6 +11,8 @@ import { catchError, retry } from 'rxjs/operators';
 })
 export class UploadPageComponent implements OnInit {
 
+  isvalid: Boolean = false;
+
   constructor(private router:Router, private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -20,9 +22,17 @@ export class UploadPageComponent implements OnInit {
     this.router.navigate(['/home']) //your router URL need to pass it here
   }
 
+  goToHomeRoute() {
+    if(this.isvalid)
+      this.router.navigate(['home']);
+    else
+      console.log("Invalid zip ! ")
+  }
+
   public uploadFileToServer(event:any) {
     let fileList: FileList = event.target.files;
     console.log(fileList)
+
     if (fileList.length > 0) {
       let file: File = fileList[0];
       let formData: FormData = new FormData();
@@ -30,12 +40,12 @@ export class UploadPageComponent implements OnInit {
       formData.append('fileType', 'zip');
 
       const headers = new HttpHeaders({
-        'Content-Type' : 'application/json',
+        'Accept' : 'application/json',
       })
-
+      console.log(formData)
       this.http.post('http://localhost:8080/uploadfile', formData, {headers:headers})
         .subscribe(
-        data => console.log('success'),
+        data => {console.log(data); if(data) this.isvalid=true},
         error => console.log(error)
         )
     }

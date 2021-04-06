@@ -20,7 +20,7 @@ export class AllsongsComponent implements OnInit {
       'Content-Type' : 'application/json',
     })
 
-    this.http.get<{ [key: string]: Number[] }>('http://localhost:8080/top?num=3',{headers: headers}).toPromise().then(
+    this.http.get<{ [key: string]: Number[] }>('http://localhost:8080/allsongs',{headers: headers}).toPromise().then(
       resp => {
         var mymap = new Map();
         for(const i in resp){ 
