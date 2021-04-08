@@ -1,8 +1,12 @@
-<div class= "container affichage" >
-    <form>
-        <input type="file" (change)="uploadFileToServer($event)" accept=".zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed">
-        <button type="file" class="btn btn-outline-secondary" (click)= "goToHomeRoute()">Submit</button>
-    </form>
+
+<div class="allthepage">
+    <div class="centering">
+        <h1 class="title" >Welcome to SpotiPie</h1>
+            <form>
+                <input class= "colorZipInput" id="myzipId" type="file" (change)="uploadFileToServer($event)" accept=".zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed">
+                <button type="file" class="custombutton" (click)= "goToHomeRoute()">Submit</button>
+            </form>
+    </div>
 </div>
 
 

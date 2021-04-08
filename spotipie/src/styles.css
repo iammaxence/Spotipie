@@ -3,9 +3,8 @@
 
 
 
-html,body {  
+body {  
     height: 100%;
-    background: rgb(2,0,36);
-    background: linear-gradient(346deg, rgba(2,0,36,1) 0%, rgba(18,56,83,0.979411833092612) 36%, rgba(0,212,255,1) 100%);
+    background:  #1DB954
 }
 
