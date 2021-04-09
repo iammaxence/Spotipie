@@ -49,6 +49,12 @@
      color:white;
  }
 
+ button:hover:disabled{
+    pointer-events: none;
+    cursor : not-allowed !important;
+}
+
+
  .colorZipInput {
      color: white;
  }
