@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class CardsComponent implements OnInit {
   @Input()
   songs :{ [key: string]: any[] } = {};
 
-  constructor() { }
+  constructor( private http: HttpClient) { }
 
   ngOnInit(): void {
    
@@ -23,5 +24,7 @@ export class CardsComponent implements OnInit {
   aboutThisSong(){
     console.log("Cick on : aboutThisSong");
   }
+
+  
 
 }

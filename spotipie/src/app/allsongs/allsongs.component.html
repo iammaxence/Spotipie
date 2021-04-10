@@ -1,5 +1,11 @@
 <div>
     <navbar-component></navbar-component>
+
+    <div class="searchbar">
+        <input class= "bar" type="text" id="searchSong" placeholder="Search for a song..">
+        <button class="custombutton " type="submit"> <img src="../../assets/search-logo.png" width="20" height="20"/></button>
+    </div>
+
     <cards-component [songs] = "allsongs"></cards-component>
 </div>
 
