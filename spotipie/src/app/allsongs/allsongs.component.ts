@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ActivatedRoute, Params } from '@angular/router'; 
 
 @Component({
   selector: 'allsongs-component',
@@ -11,25 +12,45 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class AllsongsComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private route: ActivatedRoute) { }
 
   allsongs:any = [];
+  
+  @Input()
+  id:number=0;
 
   ngOnInit(): void {
+
+    this.route.params
+      .subscribe(
+        (params: Params) => {
+          this.id = +params['id'];
+          this.loadPage(this.id);
+        }
+      );
+
+  
+  }
+
+  loadPage(id:number){
     const headers = new HttpHeaders({
       'Content-Type' : 'application/json',
     })
 
-    this.http.get<{ [key: string]: Number[] }>('http://localhost:8080/allsongs',{headers: headers}).toPromise().then(
+    const params="page="+this.id.toString()+"&nbElementByPage=20";
+
+    this.http.get<{ [key: string]: Number[] }>('http://localhost:8080/songsByPages?'+params,{headers: headers}).toPromise().then(
       resp => {
+
         var mymap = new Map();
         for(const i in resp){ 
           mymap.set(i,resp[i])
+          
         }  
         this.allsongs = ([...mymap.entries()].sort((a, b) => b[1] - a[1]));
-        console.log(this.allsongs)
       }
     );
+
   }
 
 }

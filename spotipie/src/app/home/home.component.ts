@@ -41,15 +41,16 @@ export class HomeComponent implements OnInit {
       'Content-Type' : 'application/json',
     })
 
-    this.http.get<{ [key: string]: Number[] }>('http://localhost:8080/top?num=3',{headers: headers}).toPromise().then(
-      resp => {
+    this.http.get<{ [key: string]: Number[] }>('http://localhost:8080/top?num=3',{headers: headers}).subscribe(
+      (resp) => {
         var mymap = new Map();
         for(const i in resp){ 
           mymap.set(i,resp[i])
         }  
         this.topsongs = ([...mymap.entries()].sort((a, b) => b[1] - a[1]));
         console.log(this.topsongs)
-      }
+      },
+      (error) => {console.log("Error in home component (Get request involve");}
     );
   }
 

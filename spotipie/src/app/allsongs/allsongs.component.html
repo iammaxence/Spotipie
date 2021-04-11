@@ -7,5 +7,10 @@
     </div>
 
     <cards-component [songs] = "allsongs"></cards-component>
+
+    <div style="text-align: center; padding: 5%;">
+        <a [routerLink]="['/allsongs', id>0 ? id-1 : id]" routerLinkActive="active" style="padding: 20px;">precedent</a>
+        <a [routerLink]="['/allsongs', id+1]" routerLinkActive="active" style="padding: 20px;">suivant</a>
+    </div>
 </div>
 

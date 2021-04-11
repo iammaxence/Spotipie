@@ -6,13 +6,13 @@ import { UploadPageComponent } from './upload-page/upload-page.component'
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'allsongs', component: AllsongsComponent },
+  { path: 'allsongs/:id', component: AllsongsComponent },
   { path: 'uploadfile', component: UploadPageComponent },
   { path: '', redirectTo: 'uploadfile', pathMatch: 'full' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, )],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
