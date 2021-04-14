@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ActivatedRoute, Params } from '@angular/router'; 
+import { ActivatedRoute, Params, Router } from '@angular/router'; 
 
 @Component({
   selector: 'allsongs-component',
@@ -12,12 +12,15 @@ import { ActivatedRoute, Params } from '@angular/router';
 @Injectable()
 export class AllsongsComponent implements OnInit {
 
-  constructor(private http: HttpClient,private route: ActivatedRoute) { }
+  constructor(private http: HttpClient,private route: ActivatedRoute,
+    private router:Router) { }
 
   allsongs:any = [];
   
   @Input()
   id:number=0;
+
+  @ViewChild("searchSongId") trackname!: ElementRef;
 
   ngOnInit(): void {
 
@@ -51,6 +54,14 @@ export class AllsongsComponent implements OnInit {
       }
     );
 
+  }
+
+  /**
+   * Go to search page
+   * @paramUrl : trackname to make the search
+   */
+  searchASong(){
+    this.router.navigateByUrl('/search/'+this.trackname.nativeElement.value)
   }
 
 }

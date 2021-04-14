@@ -14,6 +14,7 @@ import { BorderCardDirective } from './border-card.directive';
 import { CardsComponent } from './cards/cards.component';
 import { AllsongsComponent } from './allsongs/allsongs.component';
 import { UploadPageComponent } from './upload-page/upload-page.component';
+import { SearchPageComponent } from './search-page/search-page.component';
 
 
 
@@ -26,7 +27,8 @@ import { UploadPageComponent } from './upload-page/upload-page.component';
     CardsComponent,
     SplitPipe,
     AllsongsComponent,
-    UploadPageComponent
+    UploadPageComponent,
+    SearchPageComponent
   ],
   imports: [
     BrowserModule,
