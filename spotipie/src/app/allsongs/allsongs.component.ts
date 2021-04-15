@@ -61,7 +61,7 @@ export class AllsongsComponent implements OnInit {
    * @paramUrl : trackname to make the search
    */
   searchASong(){
-    this.router.navigateByUrl('/search/'+this.trackname.nativeElement.value)
+    this.router.navigateByUrl('/search/'+this.trackname.nativeElement.value);
   }
 
 }
