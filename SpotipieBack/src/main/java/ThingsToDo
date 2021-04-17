@@ -1,0 +1,19 @@
+## To DO List
+
+# Backend
+
+1. Change HashMap to Hashmap of HashMap (To get the artist)
+
+2. Make chart like genre of music that a personn listen the most
+
+3. The possibilty of upload the file with any name
+    -> Return error Json if not a valid file
+    -> Return sucess Json if it's a valid file
+
+4. The possibility of not keeping the file (Just use it and destroy it)
+
+# FrontEnd
+
+1. GET 404 Error when you launch the app (?? I dont knwo why yet)
+
+2. If bad zip : Message { Wrong zip ! }
