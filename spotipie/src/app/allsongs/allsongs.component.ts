@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ActivatedRoute, Params, Router } from '@angular/router'; 
+import { ActivatedRoute, Params } from '@angular/router'; 
 
 @Component({
   selector: 'allsongs-component',
@@ -12,8 +12,11 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 @Injectable()
 export class AllsongsComponent implements OnInit {
 
-  constructor(private http: HttpClient,private route: ActivatedRoute,
-    private router:Router) { }
+  constructor(private http: HttpClient,private route: ActivatedRoute) { }
+
+  numberOfSongInOnePage:number= 20;  
+
+  numberOfPages:number = 0;
 
   allsongs:any = [];
   
@@ -24,6 +27,8 @@ export class AllsongsComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.checkNumberOfSongs();
+
     this.route.params
       .subscribe(
         (params: Params) => {
@@ -31,16 +36,30 @@ export class AllsongsComponent implements OnInit {
           this.loadPage(this.id);
         }
       );
-
-  
   }
 
+  /**
+   * @description : Get the number of song to calculate the number of pages needeed
+   *
+   */
+  checkNumberOfSongs(){
+
+    this.http.get<any[]>('http://localhost:8080/numberOfSongs').subscribe(
+      resp => this.numberOfPages=(+resp/20),
+      error => console.log(error)
+    );
+  }
+
+  /**
+   * Load the page of songs
+   * @param id : Num of the page
+   */
   loadPage(id:number){
     const headers = new HttpHeaders({
       'Content-Type' : 'application/json',
     })
 
-    const params="page="+this.id.toString()+"&nbElementByPage=20";
+    const params="page="+this.id.toString()+"&nbElementByPage="+this.numberOfSongInOnePage;
 
     this.http.get<{ [key: string]: Number[] }>('http://localhost:8080/songsByPages?'+params,{headers: headers}).toPromise().then(
       resp => {
@@ -54,14 +73,6 @@ export class AllsongsComponent implements OnInit {
       }
     );
 
-  }
-
-  /**
-   * Go to search page
-   * @paramUrl : trackname to make the search
-   */
-  searchASong(){
-    this.router.navigateByUrl('/search/'+this.trackname.nativeElement.value);
   }
 
 }

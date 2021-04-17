@@ -1,0 +1,6 @@
+<div>
+    <form [formGroup]="searchForm" class="searchbar"  (ngSubmit)= "searchASong()" >
+        <input class= "bar" type="text" #searchSongId formControlName="searchInput" placeholder="Search for a song..">
+        <button class="custombutton " [disabled]="searchForm.invalid" type="submit" > <img src="../../assets/search-logo.png" width="20" height="20"/></button>
+    </form>
+</div>

@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ActivatedRoute, Params, Router } from '@angular/router'; 
+import { ActivatedRoute, Router } from '@angular/router'; 
+
 
 @Component({
   selector: 'search-page',
@@ -14,29 +15,32 @@ export class SearchPageComponent implements OnInit {
 
   allsongs:any = [];
 
-  @ViewChild("searchSongId") trackname!: ElementRef;
+  constructor(private http: HttpClient,private route: ActivatedRoute) { 
 
-  constructor(private http: HttpClient,private route: ActivatedRoute,
-    private router: Router) { }
+      //Reload Page when URL change
+      this.route.paramMap.subscribe(params => {
+        console.log(params);
+        this.searchASong();
+      })
+    }
 
   ngOnInit(): void {
-    this.searchASong()
+    this.searchASong();
   }
 
+  /**
+   * Search a song
+   * @description : Get All the songs relate to the search.
+   */
   searchASong(){
     const headers = new HttpHeaders({
       'Content-Type' : 'application/json',
       'Access-Control-Allow-Origin':'*',
     })
    
-    let params="song=";
-    if(this.trackname == undefined)
-      params+= this.route.snapshot.params.str;
-    else if (this.trackname.nativeElement.value!='')
-      this.router.navigateByUrl('/search/'+this.trackname.nativeElement.value)
-    else
-      return;
+    let params="song="+this.route.snapshot.params.str;
 
+    console.log(params)
     this.http.get<{ [key: string]: Number[] }>('http://localhost:8080/search?'+params,{headers: headers}).subscribe(
       resp => {
 
@@ -44,7 +48,8 @@ export class SearchPageComponent implements OnInit {
           for(const i in resp){ 
             mymap.set(i,resp[i])
             
-          }  
+          } 
+          //Sort by listening order (Descending order here) 
           this.allsongs = ([...mymap.entries()].sort((a, b) => b[1] - a[1]));
         },
     
