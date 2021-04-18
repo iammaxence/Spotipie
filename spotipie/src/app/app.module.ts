@@ -41,7 +41,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [UploadPageComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -28,6 +28,10 @@ export class UploadPageComponent implements OnInit {
       console.log("Invalid zip ! "+this.isvalid)
   }
 
+  get IsValid(){
+    return this.isvalid;
+  }
+
 
   /**
    * 

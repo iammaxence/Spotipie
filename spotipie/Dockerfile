@@ -1,12 +1,10 @@
-FROM node:14.1-alpine AS builder
+FROM node:14.1
 
-WORKDIR /app
-COPY package.json package-lock.json ./
+RUN mkdir /project
+WORKDIR /project
+
+COPY . .
+
+RUN npm install -g @angular/cli
 RUN npm install
-
-ENV PATH="./node_modules/.bin:$PATH"
-
-COPY . /app
-RUN ng build --prod
-
-CMD ng serve --host 0.0.0.0
+CMD ["ng", "serve", "--host", "0.0.0.0"]
