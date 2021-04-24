@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Params } from '@angular/router'; 
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'allsongs-component',
@@ -12,13 +13,18 @@ import { ActivatedRoute, Params } from '@angular/router';
 @Injectable()
 export class AllsongsComponent implements OnInit {
 
-  constructor(private http: HttpClient,private route: ActivatedRoute) { }
+  constructor(private http: HttpClient,private route: ActivatedRoute,
+    private cookieService: CookieService) {
+      this.cookie_user = document.cookie.split("=")[1];
+   }
 
   numberOfSongInOnePage:number= 20;  
 
   numberOfPages:number = 0;
 
   allsongs:any = [];
+
+  cookie_user:string ="";
   
   @Input()
   id:number=0;
@@ -44,7 +50,7 @@ export class AllsongsComponent implements OnInit {
    */
   checkNumberOfSongs(){
 
-    this.http.get<any[]>('http://localhost:8080/numberOfSongs').subscribe(
+    this.http.get<any[]>('http://localhost:8080/numberOfSongs?cookie_user='+this.cookie_user).subscribe(
       resp => this.numberOfPages=(+resp/20),
       error => console.log(error)
     );
@@ -59,7 +65,7 @@ export class AllsongsComponent implements OnInit {
       'Content-Type' : 'application/json',
     })
 
-    const params="page="+this.id.toString()+"&nbElementByPage="+this.numberOfSongInOnePage;
+    const params="page="+this.id.toString()+"&nbElementByPage="+this.numberOfSongInOnePage+"&cookie_user="+this.cookie_user;
 
     this.http.get<{ [key: string]: Number[] }>('http://localhost:8080/songsByPages?'+params,{headers: headers}).toPromise().then(
       resp => {

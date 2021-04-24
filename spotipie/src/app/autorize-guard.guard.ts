@@ -18,13 +18,8 @@ export class AutorizeGuardGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log("Rep : "+this.upc.IsValid)
-      if (this.upc.IsValid){
-        this.route.navigate(['home']);
-        return true;
-      }
-      this.route.navigate(['uploadfile']);
-      return false
+     
+      return false;
   }
   
 }

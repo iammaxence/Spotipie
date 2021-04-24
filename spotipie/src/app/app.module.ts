@@ -17,6 +17,8 @@ import { AllsongsComponent } from './allsongs/allsongs.component';
 import { UploadPageComponent } from './upload-page/upload-page.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import { CookieService } from 'ngx-cookie-service';
+import { IdService } from './Authentification/IdService';
 
 
 
@@ -41,7 +43,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [UploadPageComponent],
+  providers: [CookieService,IdService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

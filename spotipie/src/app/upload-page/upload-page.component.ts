@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
+import { IdService } from '../Authentification/IdService';
 
 @Component({
   selector: 'upload-page-component',
@@ -12,9 +14,23 @@ export class UploadPageComponent implements OnInit {
   isvalid: Boolean = false;
   isvalidSize: Boolean = true;
 
-  constructor(private router:Router, private http: HttpClient) { }
+  user_cookie: string = "";
+
+  constructor(private router:Router, private http: HttpClient,private cookieService: CookieService,
+    private idservice: IdService) { }
 
   ngOnInit(): void {
+   let DoesCookieExistForThisUser =document.cookie;
+
+   if(DoesCookieExistForThisUser){
+    this.user_cookie= document.cookie;
+   }
+   else {
+    let random_unique_id = this.idservice.generate()
+    this.cookieService.set( 'user_id', random_unique_id );
+   }
+
+    
   }
 
   submit(){
@@ -55,6 +71,8 @@ export class UploadPageComponent implements OnInit {
       let formData: FormData = new FormData();
       formData.append('uploadFile', file, file.name);
       formData.append('fileType', 'zip');
+
+      formData.append('cookie',this.user_cookie);
 
       const headers = new HttpHeaders({
         'Accept' : 'application/json',

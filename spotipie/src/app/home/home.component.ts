@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import {
@@ -31,9 +32,11 @@ export class HomeComponent implements OnInit {
 
   //topsongs :{ [key: string]: Number[] } = {};
   topsongs:any = [];
+  cookie_user:String ="";
 
-  constructor(private http: HttpClient) {
-
+  constructor(private http: HttpClient,private cookieService: CookieService) {
+    this.cookie_user = document.cookie.split("=")[1];
+    console.log("Le cookie : "+this.cookie_user);
   }
 
   ngOnInit(): void {
@@ -41,7 +44,7 @@ export class HomeComponent implements OnInit {
       'Content-Type' : 'application/json',
     })
 
-    this.http.get<{ [key: string]: Number[] }>('http://localhost:8080/top?num=3',{headers: headers}).subscribe(
+    this.http.get<{ [key: string]: Number[] }>('http://localhost:8080/top?num=3&cookie_user='+this.cookie_user,{headers: headers}).subscribe(
       (resp) => {
         var mymap = new Map();
         for(const i in resp){ 
@@ -52,6 +55,8 @@ export class HomeComponent implements OnInit {
       },
       (error) => {console.log("Error in home component (Get request involve");}
     );
+
+    console.log(document.cookie);
   }
 
  

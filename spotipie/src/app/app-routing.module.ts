@@ -7,7 +7,7 @@ import { SearchPageComponent } from './search-page/search-page.component';
 import { AutorizeGuardGuard } from './autorize-guard.guard';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent, canActivate: [AutorizeGuardGuard] },
+  { path: 'home', component: HomeComponent },
   { path: 'search/:str', component: SearchPageComponent },
   { path: 'allsongs/:id', component: AllsongsComponent },
   { path: 'uploadfile', component: UploadPageComponent },

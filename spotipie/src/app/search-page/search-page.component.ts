@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router'; 
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -14,8 +15,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class SearchPageComponent implements OnInit {
 
   allsongs:any = [];
+  cookie_user: string ="";
 
-  constructor(private http: HttpClient,private route: ActivatedRoute) { 
+  constructor(private http: HttpClient,private route: ActivatedRoute,
+    private cookieService: CookieService) { 
+
+      this.cookie_user = document.cookie.split("=")[1];
 
       //Reload Page when URL change
       this.route.paramMap.subscribe(params => {
@@ -38,7 +43,7 @@ export class SearchPageComponent implements OnInit {
       'Access-Control-Allow-Origin':'*',
     })
    
-    let params="song="+this.route.snapshot.params.str;
+    let params="song="+this.route.snapshot.params.str+"&cookie_user="+this.cookie_user;
 
     console.log(params)
     this.http.get<{ [key: string]: Number[] }>('http://localhost:8080/search?'+params,{headers: headers}).subscribe(
