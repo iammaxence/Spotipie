@@ -24,7 +24,6 @@ export class SearchPageComponent implements OnInit {
 
       //Reload Page when URL change
       this.route.paramMap.subscribe(params => {
-        console.log(params);
         this.searchASong();
       })
     }
@@ -45,7 +44,6 @@ export class SearchPageComponent implements OnInit {
    
     let params="song="+this.route.snapshot.params.str+"&cookie_user="+this.cookie_user;
 
-    console.log(params)
     this.http.get<{ [key: string]: Number[] }>('http://localhost:8080/search?'+params,{headers: headers}).subscribe(
       resp => {
 

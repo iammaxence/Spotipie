@@ -20,17 +20,22 @@ export class UploadPageComponent implements OnInit {
     private idservice: IdService) { }
 
   ngOnInit(): void {
-   let DoesCookieExistForThisUser =document.cookie;
+    
+  }
+
+  private createCookieAuth(){
+    let DoesCookieExistForThisUser = document.cookie;
+
 
    if(DoesCookieExistForThisUser){
     this.user_cookie= document.cookie;
    }
    else {
-    let random_unique_id = this.idservice.generate()
+    let random_unique_id = this.idservice.generate();
+    this.user_cookie = random_unique_id;
     this.cookieService.set( 'user_id', random_unique_id );
    }
 
-    
   }
 
   submit(){
@@ -55,6 +60,11 @@ export class UploadPageComponent implements OnInit {
    * @returns "Success" if the file have been upload successfuly
    */
   public uploadFileToServer(event:any) {
+
+    //Create a cookie : Cookie is associate to the file. So each user can only see his files
+
+    this.createCookieAuth()
+
     let fileList: FileList = event.target.files;
     let file: File = fileList[0];
 
@@ -80,7 +90,7 @@ export class UploadPageComponent implements OnInit {
       console.log(formData)
       this.http.post('http://localhost:8080/uploadfile', formData, {headers:headers})
         .subscribe(
-        data => {console.log(data); if(data) this.isvalid=true},
+        data => {console.log(data); if(data) this.isvalid=true; },
         error => console.log(error)
         )
     }

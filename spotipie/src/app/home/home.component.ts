@@ -35,11 +35,11 @@ export class HomeComponent implements OnInit {
   cookie_user:String ="";
 
   constructor(private http: HttpClient,private cookieService: CookieService) {
-    this.cookie_user = document.cookie.split("=")[1];
-    console.log("Le cookie : "+this.cookie_user);
   }
 
   ngOnInit(): void {
+    this.cookie_user = document.cookie.split("=")[1];
+
     const headers = new HttpHeaders({
       'Content-Type' : 'application/json',
     })
@@ -51,12 +51,10 @@ export class HomeComponent implements OnInit {
           mymap.set(i,resp[i])
         }  
         this.topsongs = ([...mymap.entries()].sort((a, b) => b[1] - a[1]));
-        console.log(this.topsongs)
       },
       (error) => {console.log("Error in home component (Get request involve");}
     );
 
-    console.log(document.cookie);
   }
 
  

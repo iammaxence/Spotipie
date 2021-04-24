@@ -24,7 +24,7 @@ export class SearchBarComponent implements OnInit {
         searchInput: ['', [Validators.required, Validators.minLength(1)]]
       })
 
-      this.searchForm.valueChanges.subscribe(console.log);
+      this.searchForm.valueChanges.subscribe();
 
     }
 
