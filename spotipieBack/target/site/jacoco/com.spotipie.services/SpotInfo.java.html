@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SpotInfo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SpotiPie</a> &gt; <a href="index.source.html" class="el_package">com.spotipie.services</a> &gt; <span class="el_source">SpotInfo.java</span></div><h1>SpotInfo.java</h1><pre class="source lang-java linenums">package com.spotipie.services;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.spotipie.domain.Song;
+import com.spotipie.repository.ZipMethod;
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Pattern;
+
+@Service
+public class SpotInfo {
+    private ZipMethod zipMethod;
+
+<span class="fc" id="L22">    public SpotInfo(ZipMethod zipMethod) {</span>
+<span class="fc" id="L23">        this.zipMethod = zipMethod;</span>
+<span class="fc" id="L24">    }</span>
+
+    public List&lt;Song&gt; getAllPlayedSongs() throws IOException {
+<span class="fc" id="L27">        return zipMethod.getAllPlayedSong();</span>
+    }
+
+    public int numberofSongs() throws IOException {
+<span class="fc" id="L31">        return zipMethod.getAllPlayedSong().size();</span>
+    }
+
+    public List&lt;Song&gt; songsByPages(int page, int nbElementInPage) throws IOException {
+<span class="fc" id="L35">        List&lt;Song&gt; songList = zipMethod.getAllPlayedSong();</span>
+<span class="fc" id="L36">        List&lt;Song&gt; results = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L38">        int min = page * nbElementInPage;</span>
+<span class="fc" id="L39">        int max = Math.min(songList.size(), page * nbElementInPage + nbElementInPage);</span>
+
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        for (Song song : songList.subList(min, max)) {</span>
+<span class="fc" id="L42">            results.add(song);</span>
+<span class="fc" id="L43">        }</span>
+
+<span class="fc" id="L45">        return results;</span>
+    }
+
+    /**
+     * Search for a song
+     * 
+     * @param mysong : Trackname
+     * @return Map that contains the result of the search
+     * @throws IOException
+     */
+    public List&lt;Song&gt; searchForASong(String mysong) throws IOException {
+<span class="fc" id="L56">        String title = mysong.toLowerCase();</span>
+<span class="fc" id="L57">        List&lt;Song&gt; songList = zipMethod.getAllPlayedSong();</span>
+<span class="fc" id="L58">        List&lt;Song&gt; results = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L60">        songList.forEach(song -&gt; {</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">            if (Pattern.compile(title).matcher(song.getName()).find()) {</span>
+<span class="fc" id="L62">                results.add(song);</span>
+            }
+<span class="fc" id="L64">        });</span>
+
+<span class="fc" id="L66">        return results;</span>
+    }
+
+    /**
+     * Get the top playedSong
+     * 
+     * @param number : Represent the first top played songs
+     * @return The &quot;number&quot; of top played songs
+     * @throws IOException
+     */
+    public List&lt;Song&gt; getTopPlayedSong(int number) throws IOException {
+
+<span class="fc" id="L78">        List&lt;Song&gt; results = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L79">        AtomicInteger count = new AtomicInteger(0);</span>
+
+<span class="fc" id="L81">        zipMethod.getAllPlayedSong().stream()</span>
+<span class="fc" id="L82">                .forEach(song -&gt; {</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">                    if (count.getAndIncrement() &lt; number) {</span>
+<span class="fc" id="L84">                        results.add(song);</span>
+                    }
+<span class="fc" id="L86">                });</span>
+
+<span class="fc" id="L88">        return results;</span>
+    }
+
+    /**
+     * Upload the Spotify data zip
+     * 
+     * @param request
+     * @return True for success, else False
+     */
+    public boolean uploadFile(MultipartHttpServletRequest request) throws Exception {
+<span class="nc" id="L98">        Iterator&lt;String&gt; itr = request.getFileNames();</span>
+
+<span class="nc" id="L100">        MultipartFile file = request.getFile(itr.next());</span>
+<span class="nc" id="L101">        String fileName = file.getOriginalFilename();</span>
+
+        // Check of the name : Maybe i can use all filenames
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        if (!fileName.equals(&quot;my_spotify_data.zip&quot;))</span>
+<span class="nc" id="L105">            throw new Exception(&quot;Zip name is incorrect&quot;);</span>
+
+<span class="nc" id="L107">        String savingPathDirectory = &quot;/spotipie/data/&quot;;</span>
+
+        // Directory to save the file
+<span class="nc" id="L110">        File dir = new File(savingPathDirectory);</span>
+<span class="nc" id="L111">        File fileToImport = null;</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        if (dir.isDirectory()) {</span>
+            try {
+<span class="nc" id="L114">                fileToImport = new File(dir + File.separator + fileName);</span>
+<span class="nc" id="L115">                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(fileToImport));</span>
+<span class="nc" id="L116">                stream.write(file.getBytes());</span>
+<span class="nc" id="L117">                stream.close();</span>
+<span class="nc" id="L118">            } catch (Exception e) {</span>
+<span class="nc" id="L119">                System.out.println(&quot;Got error in uploading file.&quot;);</span>
+<span class="nc" id="L120">            }</span>
+
+        }
+<span class="nc" id="L123">        return true;</span>
+    }
+
+    // private void sort(List&lt;Song&gt; songList) {
+    // Collections.sort(songList, new Comparator&lt;Song&gt;() {
+    // @Override
+    // public int compare(Song s1, Song s2) {
+    // return Integer.compare(s2.getNumberOfListening(), s1.getNumberOfListening());
+    // }
+    // });
+    // }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

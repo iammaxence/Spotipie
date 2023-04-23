@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Song.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SpotiPie</a> &gt; <a href="index.source.html" class="el_package">com.spotipie.domain</a> &gt; <span class="el_source">Song.java</span></div><h1>Song.java</h1><pre class="source lang-java linenums">package com.spotipie.domain;
+
+import com.spotipie.exception.song.AssertIsMissingField;
+
+import lombok.EqualsAndHashCode;
+
+<span class="pc bpc" id="L7" title="16 of 24 branches missed.">@EqualsAndHashCode</span>
+public class Song {
+  private String artistName;
+  private String name;
+  private int numberOfListening;
+
+<span class="fc" id="L13">  private Song(String artistName, String name, int numberOfListening) {</span>
+<span class="fc" id="L14">    this.artistName = artistName;</span>
+<span class="fc" id="L15">    this.name = name;</span>
+<span class="fc" id="L16">    this.numberOfListening = numberOfListening;</span>
+
+<span class="fc" id="L18">    assertValidSong(this);</span>
+<span class="fc" id="L19">  }</span>
+
+  public String getArtistName() {
+<span class="fc" id="L22">    return artistName;</span>
+  }
+
+  public String getName() {
+<span class="fc" id="L26">    return name;</span>
+  }
+
+  public int getNumberOfListening() {
+<span class="fc" id="L30">    return numberOfListening;</span>
+  }
+
+  private void assertValidSong(Song song) {
+<span class="fc bfc" id="L34" title="All 4 branches covered.">    if (song.getArtistName() == null || song.getArtistName().equals(&quot;&quot;)) {</span>
+<span class="fc" id="L35">      throw new AssertIsMissingField(&quot;ArtistName&quot;, song.getArtistName());</span>
+    }
+
+<span class="fc bfc" id="L38" title="All 4 branches covered.">    if (song.getName() == null || song.getName().equals(&quot;&quot;)) {</span>
+<span class="fc" id="L39">      throw new AssertIsMissingField(&quot;Name&quot;, song.getName());</span>
+    }
+<span class="fc" id="L41">  }</span>
+
+  public static class SongBuilder {
+    private String artistName;
+    private String name;
+    private int numberOfListening;
+
+<span class="fc" id="L48">    public SongBuilder() {</span>
+<span class="fc" id="L49">    }</span>
+
+    public SongBuilder artistName(String artistName) {
+<span class="fc" id="L52">      this.artistName = artistName;</span>
+<span class="fc" id="L53">      return this;</span>
+    }
+
+    public SongBuilder name(String name) {
+<span class="fc" id="L57">      this.name = name;</span>
+<span class="fc" id="L58">      return this;</span>
+    }
+
+    public SongBuilder numberOfListening(int numberOfListening) {
+<span class="fc" id="L62">      this.numberOfListening = numberOfListening;</span>
+<span class="fc" id="L63">      return this;</span>
+    }
+
+    public Song build() {
+<span class="fc" id="L67">      return new Song(artistName, name, numberOfListening);</span>
+    }
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

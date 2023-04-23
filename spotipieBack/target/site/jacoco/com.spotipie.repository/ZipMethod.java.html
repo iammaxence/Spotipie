@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ZipMethod.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SpotiPie</a> &gt; <a href="index.source.html" class="el_package">com.spotipie.repository</a> &gt; <span class="el_source">ZipMethod.java</span></div><h1>ZipMethod.java</h1><pre class="source lang-java linenums">package com.spotipie.repository;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.IntStream;
+import java.util.zip.*;
+
+import org.json.JSONObject;
+import org.springframework.stereotype.Repository;
+
+import com.spotipie.domain.Song;
+import com.spotipie.domain.Song.SongBuilder;
+
+@Repository
+public class ZipMethod {
+<span class="fc" id="L23">    private String path = &quot;my_spotify_data.zip&quot;;</span>
+
+<span class="fc" id="L25">    public ZipMethod() {</span>
+<span class="fc" id="L26">    }</span>
+
+    public List&lt;Song&gt; getAllPlayedSong() throws IOException {
+
+<span class="nc" id="L30">        ZipFile zipFile = new ZipFile(path);</span>
+<span class="nc" id="L31">        List&lt;ZipEntry&gt; zipEntries = getStreamingHistoryFiles(zipFile);</span>
+
+<span class="nc" id="L33">        List&lt;Song&gt; allPlayedSong = new ArrayList&lt;&gt;();</span>
+
+<span class="nc bnc" id="L35" title="All 2 branches missed.">        for (ZipEntry streamingHistoryFile : zipEntries) {</span>
+<span class="nc" id="L36">            List&lt;String&gt; songs = iterateThroughtStreamingHistory(streamingHistoryFile, zipFile);</span>
+
+<span class="nc" id="L38">            songs.stream().forEach(c -&gt; {</span>
+                // Convert String to JSON
+<span class="nc" id="L40">                JSONObject myjson = new JSONObject(c);</span>
+
+                // Convert trackname to lowerCase, to match the maximum of words
+<span class="nc" id="L43">                String trackName = ((String) myjson.get(&quot;trackName&quot;)).toLowerCase();</span>
+<span class="nc" id="L44">                String artist = (String) myjson.get(&quot;artistName&quot;);</span>
+
+<span class="nc" id="L46">                addSongToList(allPlayedSong, artist, trackName);</span>
+<span class="nc" id="L47">            });</span>
+<span class="nc" id="L48">        }</span>
+
+<span class="nc" id="L50">        return allPlayedSong;</span>
+    }
+
+    private void addSongToList(List&lt;Song&gt; songList, String artistName, String title) {
+<span class="nc" id="L54">        int index = getIndexOf(songList, artistName, title);</span>
+
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if (index &gt;= 0) {</span>
+<span class="nc" id="L57">            Song originalSong = songList.get(index);</span>
+<span class="nc" id="L58">            Song modifiedSong = new SongBuilder().artistName(artistName).name(title)</span>
+<span class="nc" id="L59">                    .numberOfListening(originalSong.getNumberOfListening() + 1).build();</span>
+<span class="nc" id="L60">            songList.set(index, modifiedSong);</span>
+<span class="nc" id="L61">        } else {</span>
+<span class="nc" id="L62">            songList.add(new SongBuilder().artistName(artistName).name(title)</span>
+<span class="nc" id="L63">                    .numberOfListening(1).build());</span>
+        }
+<span class="nc" id="L65">    }</span>
+
+    private int getIndexOf(List&lt;Song&gt; songList, String artistName, String title) {
+<span class="nc" id="L68">        return IntStream.range(0, songList.size())</span>
+<span class="nc bnc" id="L69" title="All 4 branches missed.">                .filter(i -&gt; songList.get(i).equals(artistName) &amp;&amp; songList.get(i).getName().equals(title)).findFirst()</span>
+<span class="nc" id="L70">                .orElse(-1);</span>
+    }
+
+    private List&lt;String&gt; iterateThroughtStreamingHistory(ZipEntry zipEntry, ZipFile zipFile) throws IOException {
+
+<span class="nc" id="L75">        String myfile = zipFileToString(zipEntry, zipFile);</span>
+
+        // Delete the &quot;[&quot; of the begining and the &quot;]&quot; at the end
+<span class="nc" id="L78">        String myfile2 = myfile.substring(1, myfile.length() - 1);</span>
+
+        // String of the file to List of String
+<span class="nc" id="L81">        List&lt;String&gt; songs = Arrays.asList(myfile2.split(&quot;(?&lt;=}),&quot;));</span>
+
+<span class="nc" id="L83">        return songs;</span>
+
+    }
+
+    private List&lt;ZipEntry&gt; getStreamingHistoryFiles(ZipFile zipFile) {
+
+<span class="nc" id="L89">        List&lt;ZipEntry&gt; listOfFiles = new ArrayList&lt;&gt;();</span>
+
+<span class="nc" id="L91">        Enumeration&lt;? extends ZipEntry&gt; entries = zipFile.entries();</span>
+
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        while (entries.hasMoreElements()) {</span>
+<span class="nc" id="L94">            ZipEntry zipEntry = entries.nextElement();</span>
+<span class="nc" id="L95">            Matcher matcher = Pattern.compile(&quot;MyData/StreamingHistory([0-9]+).json&quot;).matcher(zipEntry.getName());</span>
+
+<span class="nc bnc" id="L97" title="All 2 branches missed.">            if (matcher.find()) {</span>
+<span class="nc" id="L98">                listOfFiles.add(zipEntry);</span>
+            }
+<span class="nc" id="L100">        }</span>
+
+<span class="nc" id="L102">        return listOfFiles;</span>
+    }
+
+    private String zipFileToString(ZipEntry zipEntry, ZipFile zipFile) throws IOException {
+<span class="nc" id="L106">        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(zipFile.getInputStream(zipEntry)));</span>
+        String line;
+
+<span class="nc" id="L109">        StringBuilder s = new StringBuilder();</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">        while ((line = bufferedReader.readLine()) != null) {</span>
+<span class="nc" id="L111">            s.append(line);</span>
+        }
+<span class="nc" id="L113">        bufferedReader.close();</span>
+
+<span class="nc" id="L115">        return s.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

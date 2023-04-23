@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: com.Spotipie.SpotipieApplicationTests
+Test set: com.spotipie.SpotipieApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.338 s - in com.Spotipie.SpotipieApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.872 s - in com.spotipie.SpotipieApplicationTests
