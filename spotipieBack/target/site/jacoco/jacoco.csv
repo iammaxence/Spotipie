@@ -1,9 +1,10 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-SpotiPie,com.spotipie.services,SpotInfo,62,115,4,6,17,29,3,11,1,8
-SpotiPie,com.spotipie.exception.song,AssertIsMissingField,6,12,0,0,2,4,2,1,2,1
+SpotiPie,com.spotipie.services,SpotInfo.new Comparator() {...},0,12,0,0,0,2,0,2,0,2
+SpotiPie,com.spotipie.services,SpotInfo,0,143,0,6,0,35,0,13,0,10
+SpotiPie,com.spotipie.exception.song,AssertIsMissingField,0,18,0,0,0,5,0,2,0,2
 SpotiPie,com.spotipie,SpotipieApplication,5,3,0,0,2,1,1,1,1,1
-SpotiPie,com.spotipie.domain,Song,59,102,16,16,0,15,13,11,1,7
+SpotiPie,com.spotipie.domain,Song,2,159,1,31,0,15,1,23,0,8
 SpotiPie,com.spotipie.domain,Song.SongBuilder,0,28,0,0,0,9,0,5,0,5
+SpotiPie,com.spotipie.repository,FileManager,60,0,4,0,18,0,6,0,4,0
 SpotiPie,com.spotipie.repository,ZipMethod,218,6,14,0,45,3,15,1,8,1
-SpotiPie,com.spotipie.controller,SearchEngine,33,6,0,0,8,3,7,1,7,1
-SpotiPie,com.spotipie.exception,GlobalExceptionHandler,11,3,0,0,3,1,1,1,1,1
+SpotiPie,com.spotipie.controller,SearchEngine,0,35,0,0,0,10,0,7,0,7

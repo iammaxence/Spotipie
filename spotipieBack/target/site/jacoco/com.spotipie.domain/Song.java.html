@@ -4,11 +4,11 @@ import com.spotipie.exception.song.AssertIsMissingField;
 
 import lombok.EqualsAndHashCode;
 
-<span class="pc bpc" id="L7" title="16 of 24 branches missed.">@EqualsAndHashCode</span>
+<span class="pc bpc" id="L7" title="1 of 24 branches missed.">@EqualsAndHashCode</span>
 public class Song {
-  private String artistName;
-  private String name;
-  private int numberOfListening;
+  private final  String artistName;
+  private final String name;
+  private final int numberOfListening;
 
 <span class="fc" id="L13">  private Song(String artistName, String name, int numberOfListening) {</span>
 <span class="fc" id="L14">    this.artistName = artistName;</span>

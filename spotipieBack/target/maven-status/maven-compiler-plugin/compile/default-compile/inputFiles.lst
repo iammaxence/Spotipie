@@ -1,7 +1,7 @@
-C:\Users\maxen\Desktop\projects\Spotipie\spotipieBack\src\main\java\com\spotipie\services\SpotInfo.java
-C:\Users\maxen\Desktop\projects\Spotipie\spotipieBack\src\main\java\com\spotipie\SpotipieApplication.java
-C:\Users\maxen\Desktop\projects\Spotipie\spotipieBack\src\main\java\com\spotipie\exception\GlobalExceptionHandler.java
-C:\Users\maxen\Desktop\projects\Spotipie\spotipieBack\src\main\java\com\spotipie\exception\song\AssertIsMissingField.java
-C:\Users\maxen\Desktop\projects\Spotipie\spotipieBack\src\main\java\com\spotipie\repository\ZipMethod.java
-C:\Users\maxen\Desktop\projects\Spotipie\spotipieBack\src\main\java\com\spotipie\controller\SearchEngine.java
-C:\Users\maxen\Desktop\projects\Spotipie\spotipieBack\src\main\java\com\spotipie\domain\Song.java
+/home/maxenceippon/perso/Spotipie/spotipieBack/src/main/java/com/spotipie/exception/song/AssertIsMissingField.java
+/home/maxenceippon/perso/Spotipie/spotipieBack/src/main/java/com/spotipie/SpotipieApplication.java
+/home/maxenceippon/perso/Spotipie/spotipieBack/src/main/java/com/spotipie/repository/ZipMethod.java
+/home/maxenceippon/perso/Spotipie/spotipieBack/src/main/java/com/spotipie/services/SpotInfo.java
+/home/maxenceippon/perso/Spotipie/spotipieBack/src/main/java/com/spotipie/controller/SearchEngine.java
+/home/maxenceippon/perso/Spotipie/spotipieBack/src/main/java/com/spotipie/repository/FileManager.java
+/home/maxenceippon/perso/Spotipie/spotipieBack/src/main/java/com/spotipie/domain/Song.java

@@ -10,12 +10,8 @@ public class AssertIsMissingField extends RuntimeException {
 <span class="fc" id="L10">    this.value = value;</span>
 <span class="fc" id="L11">  }</span>
 
-  public String getFieldName() {
-<span class="nc" id="L14">    return fieldName;</span>
-  }
-
-  public String getValue() {
-<span class="nc" id="L18">    return value;</span>
+  public String getMessage() {
+<span class="fc" id="L14">    return &quot;[Song] The field &quot; + fieldName + &quot; is not valid : &quot; + value;</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

@@ -1,8 +1,9 @@
-com\spotipie\repository\ZipMethod.class
-com\spotipie\exception\GlobalExceptionHandler.class
-com\spotipie\controller\SearchEngine.class
-com\spotipie\exception\song\AssertIsMissingField.class
-com\spotipie\services\SpotInfo.class
-com\spotipie\SpotipieApplication.class
-com\spotipie\domain\Song$SongBuilder.class
-com\spotipie\domain\Song.class
+com/spotipie/services/SpotInfo$1.class
+com/spotipie/domain/Song.class
+com/spotipie/domain/Song$SongBuilder.class
+com/spotipie/repository/ZipMethod.class
+com/spotipie/SpotipieApplication.class
+com/spotipie/exception/song/AssertIsMissingField.class
+com/spotipie/repository/FileManager.class
+com/spotipie/services/SpotInfo.class
+com/spotipie/controller/SearchEngine.class

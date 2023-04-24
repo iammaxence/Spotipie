@@ -1,6 +1,9 @@
-com\spotipie\repository\ZipMethodTest.class
-com\spotipie\domain\SongTests.class
-com\spotipie\services\SpotInfoTests.class
-com\spotipie\SpotipieApplicationTests.class
-com\spotipie\domain\SongTests$MissingField.class
-com\spotipie\services\SpotInfoTests$SearchForASong.class
+com/spotipie/domain/SongTests.class
+com/spotipie/exception/song/AssertIsMissingFieldTests.class
+com/spotipie/services/SpotInfoTests$SearchForASong.class
+com/spotipie/services/SpotInfoTests$UploadFile.class
+com/spotipie/domain/SongTests$MissingField.class
+com/spotipie/services/SpotInfoTests.class
+com/spotipie/controller/SearchEngineTests.class
+com/spotipie/domain/SongTests$CompareSong.class
+com/spotipie/repository/ZipMethodTests.class
