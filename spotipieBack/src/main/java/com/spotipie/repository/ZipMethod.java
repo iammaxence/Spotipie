@@ -20,7 +20,7 @@ import com.spotipie.domain.Song.SongBuilder;
 
 @Repository
 public class ZipMethod {
-    private String path = "my_spotify_data.zip";
+    private String path = "./my_spotify_data.zip";
 
     public ZipMethod() {
     }
@@ -66,7 +66,7 @@ public class ZipMethod {
 
     private int getIndexOf(List<Song> songList, String artistName, String title) {
         return IntStream.range(0, songList.size())
-                .filter(i -> songList.get(i).equals(artistName) && songList.get(i).getName().equals(title)).findFirst()
+                .filter(i -> songList.get(i).getArtistName().equals(artistName) && songList.get(i).getName().equals(title)).findFirst()
                 .orElse(-1);
     }
 

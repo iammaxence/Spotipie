@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Repository
 public class FileManager {
 
-  private static final String savingPathDirectory = "/spotipie/data/";
+  private static final String savingPathDirectory = "./";
 
   /**
      * Upload the Spotify data zip
@@ -27,18 +27,21 @@ public class FileManager {
 
   private void saveFile(MultipartFile file) {
     File dir = new File(savingPathDirectory);
-      File fileToImport = null;
-      if (dir.isDirectory()) {
-          try {
-              fileToImport = new File(dir + File.separator + file.getOriginalFilename());
-              BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(fileToImport));
-              stream.write(file.getBytes());
-              stream.close();
-          } catch (Exception e) {
-              System.out.println("Got error in uploading file.");
-          }
+    File fileToImport = null;
+    if (dir.isDirectory()) {
+      try {
+        
+          fileToImport = new File(dir + File.separator + file.getOriginalFilename());
+          BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(fileToImport));
+          stream.write(file.getBytes());
 
+          stream.close();
+      } catch (Exception e) {
+          System.out.println("Got error in uploading file : "+e);
       }
+    } else {
+      System.out.println("Path to save is not a directory");
+    }
   }
 
   private void assertFileNameIsNotValid(String fileName) throws Exception {

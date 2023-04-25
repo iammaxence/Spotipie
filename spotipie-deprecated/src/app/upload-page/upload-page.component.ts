@@ -11,8 +11,8 @@ import { IdService } from '../Authentification/IdService';
 })
 export class UploadPageComponent implements OnInit {
 
-  isvalid: Boolean = false;
-  isvalidSize: Boolean = true;
+  isvalid: boolean = false;
+  isvalidSize: boolean = true;
 
   user_cookie: string = "";
 
@@ -87,10 +87,10 @@ export class UploadPageComponent implements OnInit {
       const headers = new HttpHeaders({
         'Accept' : 'application/json',
       })
-      console.log(formData)
+      console.log("form : "+ formData)
       this.http.post('http://localhost:8080/uploadfile', formData, {headers:headers})
         .subscribe(
-        data => {console.log(data); if(data) this.isvalid=true; },
+        data => {console.log("data: "+ data); this.isvalid=true; },
         error => console.log(error)
         )
     }
@@ -105,10 +105,10 @@ export class UploadPageComponent implements OnInit {
   private fileSizeValidation(file: File){
     
     const fileSizeInKB = Math.round(file.size / 1024)/1000;
-    console.log(fileSizeInKB);
-    if (fileSizeInKB >= 20) {
-      return false;
-    }
+    console.log("file size = " + fileSizeInKB);
+    // if (fileSizeInKB >= 2000) {
+    //   return false;
+    // }
     
     return true;
   }
