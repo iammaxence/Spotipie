@@ -2,8 +2,9 @@ import { Route, Routes } from 'react-router-dom';
 import { Upload } from "../pages/upload/Upload";
 import { ProtectedRoute } from './ProtectedRoute';
 import { Home } from '../pages/home/Home';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import FileStorage from '../config/FileStorage';
+import { NavBar } from '../pages/navbar/NavBar';
 
 export function Router() {
   const [isFileUpload, setIsFileUpload] = useState(false);
@@ -24,9 +25,12 @@ export function Router() {
     <Route
       path="/home"
       element={
-        <ProtectedRoute isRouteAccessible={isFileUpload}>
+        <Fragment>
+          <NavBar />
+          <ProtectedRoute isRouteAccessible={isFileUpload}>
           <Home />
-        </ProtectedRoute>
+          </ProtectedRoute>
+        </Fragment>
       }
     />
   </Routes>)

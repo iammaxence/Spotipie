@@ -15,6 +15,7 @@ export function useUploadHelper({setIsFileUpload}: UploadHelperProps) {
   
   const uploadFileToServer = () => {
     let fileList: FileList = input.target.files;
+    console.log(fileList);
     let file: File = fileList[0];
 
     if (fileList.length > 0 ) {
