@@ -8,7 +8,6 @@ interface GuardedRouteProps {
 
 
 export const ProtectedRoute = ({ isRouteAccessible, children }: GuardedRouteProps) => {
-  console.log("isRouteAccessible : "+isRouteAccessible);
   if (!isRouteAccessible) {
     return <Navigate to="/upload" replace />;
   }

@@ -13,7 +13,6 @@ export default class FileStorage {
   }
 
   isFileUpload() {
-    console.log(" this.storage.getItem('file') : "+  this.storage.getItem('file'));
     return this.storage.getItem('file') === 'true';
   }
 }

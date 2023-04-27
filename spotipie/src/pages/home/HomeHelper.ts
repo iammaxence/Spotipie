@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react"
 import { Song } from "../../domain/Song";
-import { AxiosHttp } from "../../config/AxiosHttp";
-import axios from "axios";
 import { TopSongResponse } from "./response/TopSongResponse";
 import { songListMapper } from "./mapper/SongMapper";
+import { HttpPort } from "../../config/HttpPort";
 
-export function useHomeHelper() {
-  const axiosHttp = new AxiosHttp(axios.create({ baseURL: 'http://localhost:8080' }))
+interface HomeHelperProps {
+  axiosHttp: HttpPort
+}
 
+export function useHomeHelper({ axiosHttp }: HomeHelperProps) {
   const [topSongs, setTopSongs] = useState<Song[]>([]);
 
   useEffect(() => {

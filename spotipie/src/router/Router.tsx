@@ -5,8 +5,11 @@ import { Home } from '../pages/home/Home';
 import { Fragment, useEffect, useState } from 'react';
 import FileStorage from '../config/FileStorage';
 import { NavBar } from '../pages/navbar/NavBar';
+import { AxiosHttp } from '../config/AxiosHttp';
+import axios from 'axios';
 
 export function Router() {
+  const axiosHttp = new AxiosHttp(axios.create({ baseURL: 'http://localhost:8080' }))
   const [isFileUpload, setIsFileUpload] = useState(false);
   const fileStorage = new FileStorage(window.localStorage);
 
@@ -20,15 +23,15 @@ export function Router() {
 
   return(
   <Routes>
-    <Route path="/" element={<Upload setIsFileUpload={setIsFileUpload} />} />
-    <Route path="/upload" element={<Upload setIsFileUpload={setIsFileUpload} />} />
+    <Route path="/" element={<Upload axiosHttp={axiosHttp} setIsFileUpload={setIsFileUpload} />} />
+    <Route path="/upload" element={<Upload axiosHttp={axiosHttp} setIsFileUpload={setIsFileUpload} />} />
     <Route
       path="/home"
       element={
         <Fragment>
           <NavBar />
           <ProtectedRoute isRouteAccessible={isFileUpload}>
-          <Home />
+          <Home axiosHttp={axiosHttp}/>
           </ProtectedRoute>
         </Fragment>
       }

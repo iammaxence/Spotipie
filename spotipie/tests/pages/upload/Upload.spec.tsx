@@ -3,12 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import { useUploadHelper } from '../../../src/pages/upload/UploadHelper';
 import { act, renderHook } from '@testing-library/react';
 import * as ReactRouterDom from "react-router-dom";
+import { AxiosHttpFixture } from '../../config/AxiosHttpFixture';
 
 vi.mock('../../src/config/AxiosHttp'); 
 
 vi.mock('react-router-dom', () => ({
   useNavigate: () => vi.fn(),
 }));
+
+
+const axiosHttp = AxiosHttpFixture();
 
 describe('useUploadHelper', () => {
 
@@ -18,7 +22,7 @@ describe('useUploadHelper', () => {
 
   it('should upload a file', async () => {
     const setIsFileUpload = vi.fn();
-    const { result } = renderHook(() => useUploadHelper({setIsFileUpload}));
+    const { result } = renderHook(() => useUploadHelper({axiosHttp, setIsFileUpload}));
     vi.spyOn(ReactRouterDom, 'useNavigate');
 
     const file1 = new File(["Hello, world!"], "hello.txt", { type: "text/plain" });
@@ -50,7 +54,7 @@ describe('useUploadHelper', () => {
 
   it('Should throw error when input file is empty', () => {
     const setIsFileUpload = vi.fn();
-    const { result } = renderHook(() => useUploadHelper({setIsFileUpload}));
+    const { result } = renderHook(() => useUploadHelper({axiosHttp,setIsFileUpload}));
     vi.spyOn(ReactRouterDom, 'useNavigate');
 
     const input = {

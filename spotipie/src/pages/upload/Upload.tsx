@@ -1,16 +1,18 @@
+import { HttpPort } from '../../config/HttpPort';
 import './Upload.scss';
 import { useUploadHelper } from "./UploadHelper";
 
 interface UploadProps {
+  axiosHttp: HttpPort
   setIsFileUpload: (isFileUpload: boolean) => void
 }
 
-export function Upload({ setIsFileUpload }: UploadProps) {
+export function Upload({ axiosHttp, setIsFileUpload }: UploadProps) {
 
-  const { uploadFileToServer, setInput } = useUploadHelper({setIsFileUpload})
+  const { uploadFileToServer, setInput } = useUploadHelper({axiosHttp, setIsFileUpload})
   
   return (
-    <>
+    <div className='upload'>
       <h1 className="title" >Welcome to SpotiPie</h1>
       <form className="form">
         <input
@@ -21,6 +23,6 @@ export function Upload({ setIsFileUpload }: UploadProps) {
         />
         <button type="button" onClick={uploadFileToServer}>Submit</button>
       </form>
-    </>
+    </div>
    );
 }

@@ -1,6 +1,7 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
+import { HttpPort } from './HttpPort';
 
-export class AxiosHttp {
+export class AxiosHttp implements HttpPort{
   constructor(private axiosInstance: AxiosInstance) {}
 
   async get<Result>(uri: string): Promise<AxiosResponse<Result>> {

@@ -1,21 +1,19 @@
-import axios from "axios";
-import { AxiosHttp } from "../../config/AxiosHttp";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { HttpPort } from "../../config/HttpPort";
 
 interface UploadHelperProps {
+  axiosHttp: HttpPort
   setIsFileUpload: (isFileUpload: boolean) => void
 }
 
-export function useUploadHelper({setIsFileUpload}: UploadHelperProps) {
-  const axiosHttp = new AxiosHttp(axios.create({ baseURL: 'http://localhost:8080' }))
+export function useUploadHelper({axiosHttp, setIsFileUpload}: UploadHelperProps) {
   const [input, setInput] = useState<any>();
   const navigate = useNavigate();
   
   
   const uploadFileToServer = () => {
     let fileList: FileList = input.target.files;
-    console.log(fileList);
     let file: File = fileList[0];
 
     if (fileList.length > 0 ) {

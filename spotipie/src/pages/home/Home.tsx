@@ -1,9 +1,15 @@
+import { HttpPort } from '../../config/HttpPort';
 import './Home.scss';
 import { useHomeHelper } from './HomeHelper';
 
-export function Home() {
+interface HomeProps {
+  axiosHttp: HttpPort
+}
 
-  const { topSongs } = useHomeHelper();
+
+export function Home({ axiosHttp }: HomeProps) {
+
+  const { topSongs } = useHomeHelper({ axiosHttp });
 
   return (
     <div className="home">

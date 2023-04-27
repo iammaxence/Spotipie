@@ -1,5 +1,6 @@
 import { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { vi } from 'vitest';
+import { HttpPort } from '../../src/config/HttpPort';
 import { AxiosHttp } from '../../src/config/AxiosHttp';
 
 const mockAxiosInstance: any = {
@@ -17,7 +18,7 @@ const mockAxiosResponse: AxiosResponse<any> = {
   config: {} as InternalAxiosRequestConfig,
 };
 
-let axiosHttp: AxiosHttp;
+let axiosHttp: HttpPort;
 
 beforeEach(() => {
   axiosHttp = new AxiosHttp(mockAxiosInstance);
