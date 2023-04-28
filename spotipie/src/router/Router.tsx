@@ -14,27 +14,45 @@ export function Router() {
   const fileStorage = new FileStorage(window.localStorage);
 
   useEffect(() => {
-    if(!isFileUpload) {
-      fileStorage.deleteAll();
-    } else {
-      fileStorage.setItem();
+    initIsFileUploadState();
+  }, []);
+
+  useEffect(() => {
+    fileUploadStateChange();
+  }, [isFileUpload]);
+
+  function initIsFileUploadState(): void {
+    if(fileStorage.isFileUpload()) {
+      setIsFileUpload(true);
     }
-  }, [isFileUpload])
+  }
+
+  function fileUploadStateChange(): void {
+    if(isFileUpload) {
+      fileStorage.setItem();
+    } else {
+      fileStorage.deleteAll();
+    }
+  }
+
+  function hasFileBeenUpload(): boolean {
+    return fileStorage.isFileUpload() || isFileUpload;
+  }
 
   return(
-  <Routes>
-    <Route path="/" element={<Upload axiosHttp={axiosHttp} setIsFileUpload={setIsFileUpload} />} />
-    <Route path="/upload" element={<Upload axiosHttp={axiosHttp} setIsFileUpload={setIsFileUpload} />} />
-    <Route
-      path="/home"
-      element={
-        <Fragment>
-          <NavBar />
-          <ProtectedRoute isRouteAccessible={isFileUpload}>
-          <Home axiosHttp={axiosHttp}/>
-          </ProtectedRoute>
-        </Fragment>
-      }
-    />
-  </Routes>)
+    <Routes>
+      <Route path="/" element={<Upload axiosHttp={axiosHttp} setIsFileUpload={setIsFileUpload} />} />
+      <Route path="/upload" element={<Upload axiosHttp={axiosHttp} setIsFileUpload={setIsFileUpload} />} />
+      <Route
+        path="/home"
+        element={
+          <Fragment>
+            <NavBar />
+            <ProtectedRoute isRouteAccessible={hasFileBeenUpload()}>
+            <Home axiosHttp={axiosHttp}/>
+            </ProtectedRoute>
+          </Fragment>
+        }
+      />
+    </Routes>)
 }

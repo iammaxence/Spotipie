@@ -1,4 +1,12 @@
 .home {
   color: black;
   height: 100%;
+
+  &--songs{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
 }

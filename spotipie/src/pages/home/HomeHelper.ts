@@ -18,7 +18,7 @@ export function useHomeHelper({ axiosHttp }: HomeHelperProps) {
     }
 
     fetchTopSongs();
-  })
+  }, [])
 
   return {
     topSongs

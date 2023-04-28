@@ -1,8 +1,6 @@
 export default class FileStorage {
 
-  constructor(private storage: Storage){
-    this.storage.setItem('file', 'false');
-  }
+  constructor(private storage: Storage){}
 
   setItem() {
     this.storage.setItem('file','true');

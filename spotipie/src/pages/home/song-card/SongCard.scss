@@ -1,0 +1,13 @@
+.song-card {
+  display: inline-flex;
+  gap: 1rem;
+
+  &--img {
+    width: 100px;
+    height: 100px;
+  }
+  &--text {
+    display: flex;
+    flex-direction: column;
+  }
+}

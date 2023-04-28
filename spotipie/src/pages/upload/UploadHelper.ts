@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { HttpPort } from "../../config/HttpPort";
 
@@ -10,6 +10,10 @@ interface UploadHelperProps {
 export function useUploadHelper({axiosHttp, setIsFileUpload}: UploadHelperProps) {
   const [input, setInput] = useState<any>();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsFileUpload(false);
+  },[]);
   
   
   const uploadFileToServer = () => {

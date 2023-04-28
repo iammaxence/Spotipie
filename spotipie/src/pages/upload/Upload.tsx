@@ -13,7 +13,7 @@ export function Upload({ axiosHttp, setIsFileUpload }: UploadProps) {
   
   return (
     <div className='upload'>
-      <h1 className="title" >Welcome to SpotiPie</h1>
+      <h1 className="title">Welcome to SpotiPie</h1>
       <form className="form">
         <input
           id="myzipId"
