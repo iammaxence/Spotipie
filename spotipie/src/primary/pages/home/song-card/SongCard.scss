@@ -5,9 +5,12 @@
   &--img {
     width: 100px;
     height: 100px;
+    border: solid 1px black;
   }
+
   &--text {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
   }
 }

@@ -1,6 +1,6 @@
 import { describe, expect, vi} from 'vitest';
 import { useNavigate } from 'react-router-dom';
-import { useUploadHelper } from '../../../src/pages/upload/UploadHelper';
+import { useUploadHelper } from '../../../src/primary/pages/upload/UploadHelper';
 import { act, renderHook } from '@testing-library/react';
 import * as ReactRouterDom from "react-router-dom";
 import { AxiosHttpFixture } from '../../config/AxiosHttpFixture';

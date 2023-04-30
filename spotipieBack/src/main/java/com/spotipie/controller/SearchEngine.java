@@ -19,7 +19,7 @@ public class SearchEngine {
     }
 
     @RequestMapping("/top")
-    public List<Song> getTopPlayedSongs(@RequestParam(value = "num") int number) throws Exception {
+    public List<Song> getTopPlayedSongs(@RequestParam(value = "num") int number, String email) throws Exception {
 
         return spotInfo.getTopPlayedSong(number);
     }

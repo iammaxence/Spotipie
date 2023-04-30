@@ -1,7 +1,8 @@
-# Tauri + React + Typescript
+# Spotipie desktop app
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
+## How to get your token
+1. Go to https://developer.spotify.com/dashboard
 
-## Recommended IDE Setup
+## Board
+- Add env variables and make it work
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
