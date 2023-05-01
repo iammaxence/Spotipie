@@ -1,5 +1,5 @@
-import { ReactElement } from "react";
-import { Navigate } from "react-router-dom";
+import React, { ReactElement } from 'react';
+import { Navigate } from 'react-router-dom';
 
 interface GuardedRouteProps {
 	isRouteAccessible?: boolean;
@@ -8,10 +8,10 @@ interface GuardedRouteProps {
 
 
 export const ProtectedRoute = ({ isRouteAccessible, children }: GuardedRouteProps) => {
-  console.log("isRouteAccessible :" + isRouteAccessible);
-  if (!isRouteAccessible) {
-    return <Navigate to="/upload" replace />;
-  }
+	console.log('isRouteAccessible :' + isRouteAccessible);
+	if (!isRouteAccessible) {
+		return <Navigate to="/login" replace />;
+	}
 
-  return children;
+	return children;
 };

@@ -1,4 +1,15 @@
 -------------------------------------------------------------------------------
 Test set: com.spotipie.domain.SongTests
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.089 s - in com.spotipie.domain.SongTests
+Tests run: 8, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.185 s <<< FAILURE! - in com.spotipie.domain.SongTests
+equalsContract  Time elapsed: 0.11 s  <<< FAILURE!
+java.lang.AssertionError: 
+EqualsVerifier found a problem in class com.spotipie.domain.Song.
+-> Unsupported class file major version 61
+
+For more information, go to: https://www.jqno.nl/equalsverifier/errormessages
+(EqualsVerifier 3.12.3, JDK 17.0.7 on Windows 11)
+	at com.spotipie.domain.SongTests$CompareSong.equalsContract(SongTests.java:31)
+Caused by: java.lang.IllegalArgumentException: Unsupported class file major version 61
+	at com.spotipie.domain.SongTests$CompareSong.equalsContract(SongTests.java:31)
+

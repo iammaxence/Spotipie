@@ -3,21 +3,12 @@
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 
-// #[path = "../src/spotify_api.rs"]
-// mod spotify_api;
-
-#[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
-}
-
-// fn get_authorization() -> String {
-//     let spotify_api_client = spotify_api::SpotifyApiClient::new(client_id, client_secret, redirect_uri);
-// }
+//     const CLIENT_ID: &str = "1d41a7bc4b7e491eb7951830ba5d4756";
+//     const CLIENT_SECRET: &str = "efc9df2be7b54103b3a7c16602c4b29e";
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![greet])
+        .invoke_handler(tauri::generate_handler![])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
