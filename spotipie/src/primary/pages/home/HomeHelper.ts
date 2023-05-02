@@ -1,26 +1,19 @@
-import { useEffect, useState } from 'react';
-import { Song } from '../../../domain/Song';
-import { TopSongResponse } from './response/TopSongResponse';
-import { songListMapper } from './mapper/SongMapper';
-import { HttpPort } from '../../../config/HttpPort';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { HttpPort } from '../../../config/axios/HttpPort';
 
 interface HomeHelperProps {
   axiosHttp: HttpPort
 }
 
 export function useHomeHelper({ axiosHttp }: HomeHelperProps) {
-	const [topSongs, setTopSongs] = useState<Song[]>([]);
+	const { search } = useLocation();
 
 	useEffect(() => {
-		const fetchTopSongs = async () => {
-			const { data } = await axiosHttp.get<TopSongResponse[]>('/top?num=3');
-			setTopSongs(songListMapper(data));
-		};
+		const urlParams = new URLSearchParams(search);
+		const code = urlParams.get('code');
+		const state = urlParams.get('state');
 
-		fetchTopSongs();
+		console.log(`code: ${code}, state: ${state}`);
 	}, []);
-
-	return {
-		topSongs
-	}; 
 }

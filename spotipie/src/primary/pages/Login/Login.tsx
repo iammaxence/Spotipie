@@ -1,7 +1,7 @@
 import React from 'react';
-import { HttpPort } from '../../../config/HttpPort';
 import './Login.scss';
 import { useLoginHelper } from './LoginHelper';
+import { HttpPort } from '../../../config/axios/HttpPort';
 
 interface LoginProps {
   axiosHttp: HttpPort

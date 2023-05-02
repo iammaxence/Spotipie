@@ -4,7 +4,7 @@ interface LoginHelperProps {
   axiosHttp: HttpPort
 }
 
-interface LoginResponse {
+export interface LoginResponse {
 	data: string;
 }
 
