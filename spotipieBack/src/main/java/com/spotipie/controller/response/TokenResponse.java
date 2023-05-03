@@ -3,12 +3,13 @@ package com.spotipie.controller.response;
 public class TokenResponse {
   private String access_token;
   private String refresh_token;
-  private String expires_in;
+  private int expires_in;
   private String token_type;
   private String scope;
 
-    
-  public TokenResponse(String access_token, String refresh_token, String expires_in, String token_type, String scope) {
+  public TokenResponse(){}
+
+  public TokenResponse(String access_token, String refresh_token, int expires_in, String token_type, String scope) {
       this.access_token = access_token;
       this.refresh_token = refresh_token;
       this.expires_in = expires_in;
@@ -32,11 +33,11 @@ public class TokenResponse {
     this.refresh_token = refresh_token;
   }
 
-  public String getExpires_in() {
+  public int getExpires_in() {
     return this.expires_in;
   }
 
-  public void setExpires_in(String expires_in) {
+  public void setExpires_in(int expires_in) {
     this.expires_in = expires_in;
   }
 
