@@ -7,7 +7,6 @@ interface HomeProps {
   axiosHttp: HttpPort
 }
 
-
 export function Home({ axiosHttp }: HomeProps) {
 
 	useHomeHelper({ axiosHttp });

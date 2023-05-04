@@ -3,8 +3,6 @@ package com.spotipie.controller.request;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import ch.qos.logback.core.subst.Token;
-
 public class TokenRequest {
   private final String code;
   private final String redirect_uri;

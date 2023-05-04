@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { describe, expect, it, vi } from 'vitest';
 import { AxiosHttpFixture } from '../../../config/AxiosHttpFixture';
-import { useLoginHelper } from '../../../../src/primary/pages/Login/LoginHelper';
+import { useLoginHelper } from '../../../../src/primary/pages/login/LoginHelper';
 import { renderHook } from '@testing-library/react';
 
 vi.mock('../../src/config/AxiosHttp'); 

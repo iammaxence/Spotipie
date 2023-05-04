@@ -1,29 +1,22 @@
 import { useContext } from 'react';
 import { useLocalStorage } from './useLocalStorage';
-import { AuthContext } from '../../router/AuthContext';
-import { Token } from '../../domain/token/Token';
+import { User } from '../../domain/User';
+import { AuthContext } from '../context/AuthContext';
 
 export const useUser = () => {
 	const { user, setUser } = useContext(AuthContext);
-	const { setItem } = useLocalStorage();
+	const { setItem, removeItem } = useLocalStorage();
 
-	const addUser = (user: Token) => {
+	const addUser = (user: User) => {
 		setUser(user);
 		setItem('user', JSON.stringify(user));
 	};
 
 	const removeUser = () => {
 		setUser(null);
-		setItem('user', '');
+		removeItem('user');
+		removeItem('tokens');
 	};
 
-	const login = (user: Token) => {
-		addUser(user);
-	};
-
-	const logout = () => {
-		removeUser();
-	};
-
-	return { user, login, logout };
+	return { user, addUser, removeUser };
 };
