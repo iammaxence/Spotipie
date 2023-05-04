@@ -24,7 +24,7 @@ import com.spotipie.exception.HttpExceptionHandler;
 public class AuthorizationRespository {
 
   private static final String AUTH_URL = "https://accounts.spotify.com/api/token";
-  private static final String CLIENT_SECRET = "";
+  private static final String CLIENT_SECRET = "efc9df2be7b54103b3a7c16602c4b29e";
 
   private final RestTemplate restTemplate;
   private final TokenResponseMapper tokenResponseMapper;

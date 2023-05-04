@@ -1,4 +1,4 @@
-import { HttpPort } from '../../config/axios/HttpPort';
+import { HttpPort } from '../../domain/HttpPort';
 import { AuthorizationPort } from '../../domain/AuthorizationPort';
 import { Token } from '../../domain/token/Token';
 import { TokenResponse } from '../../primary/pages/home/response/TokenResponse';

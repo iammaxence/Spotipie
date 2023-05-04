@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { HttpPort } from '../../../config/axios/HttpPort';
+import { HttpPort } from '../../../domain/HttpPort';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Home.scss';
 import { useHomeHelper } from './HomeHelper';
-import { HttpPort } from '../../../config/axios/HttpPort';
+import { HttpPort } from '../../../domain/HttpPort';
 
 interface HomeProps {
   axiosHttp: HttpPort

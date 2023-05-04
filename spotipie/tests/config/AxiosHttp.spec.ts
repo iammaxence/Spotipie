@@ -1,7 +1,7 @@
 import { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { vi } from 'vitest';
 import { HttpPort } from '../../src/config/HttpPort';
-import { AxiosHttp } from '../../src/config/axios/AxiosHttp';
+import { AxiosHttp } from '../../src/secondary/http/AxiosHttp';
 
 const mockAxiosInstance: any = {
 	get: vi.fn(),

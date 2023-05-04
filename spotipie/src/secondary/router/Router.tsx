@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContextProvider } from '../../primary/context/AuthContext';
-import { AxiosHttp } from '../../config/axios/AxiosHttp';
+import { AxiosHttp } from '../http/AxiosHttp';
 import { Login } from '../../primary/pages/login/Login';
 import { NavBar } from '../../primary/pages/navbar/NavBar';
 import { Home } from '../../primary/pages/home/Home';

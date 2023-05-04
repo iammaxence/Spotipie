@@ -1,5 +1,5 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
-import { HttpPort } from './HttpPort';
+import { HttpPort } from '../../domain/HttpPort';
 
 export class AxiosHttp implements HttpPort{
 	constructor(private axiosInstance: AxiosInstance) {}

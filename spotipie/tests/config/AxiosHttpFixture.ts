@@ -1,5 +1,5 @@
 import { vi } from 'vitest';
-import { AxiosHttp } from '../../src/config/axios/AxiosHttp';
+import { AxiosHttp } from '../../src/secondary/http/AxiosHttp';
 import { AxiosInstance } from 'axios';
 import { HttpPort } from '../../src/config/HttpPort';
 

@@ -1,2 +1,6 @@
-# Spotipie
-Easiest way to view your spotify data
+# Spotipie desktop app
+
+## Board
+
+- Add env variables and make it work
+- Make tests
