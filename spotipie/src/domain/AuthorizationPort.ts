@@ -1,4 +1,4 @@
-import { Token } from './token/Token';
+import { Token } from './Token';
 
 export interface AuthorizationPort {
   getAuthorizationCode(): Promise<string>

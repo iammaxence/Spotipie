@@ -1,7 +1,7 @@
 import { vi } from 'vitest';
-import { AxiosHttp } from '../../src/secondary/http/AxiosHttp';
+import { AxiosHttp } from '../../../src/secondary/http/AxiosHttp';
 import { AxiosInstance } from 'axios';
-import { HttpPort } from '../../src/config/HttpPort';
+import { HttpPort } from '../../../src/domain/HttpPort';
 
 export const AxiosHttpFixture = (options: Partial<HttpPort> = {}): HttpPort => {
 	const axiosInstanceMock = {

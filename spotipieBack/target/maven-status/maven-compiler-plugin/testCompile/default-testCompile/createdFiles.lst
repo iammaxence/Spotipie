@@ -1,9 +1,0 @@
-com\spotipie\exception\song\AssertIsMissingFieldTests.class
-com\spotipie\controller\SearchEngineTests.class
-com\spotipie\services\SpotInfoTests$UploadFile.class
-com\spotipie\domain\SongTests.class
-com\spotipie\services\SpotInfoTests.class
-com\spotipie\domain\SongTests$CompareSong.class
-com\spotipie\repository\ZipMethodTests.class
-com\spotipie\domain\SongTests$MissingField.class
-com\spotipie\services\SpotInfoTests$SearchForASong.class

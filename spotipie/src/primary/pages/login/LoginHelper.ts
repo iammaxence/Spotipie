@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { useEffect } from 'react';
-import { Token } from '../../../domain/token/Token';
+import { Token } from '../../../domain/Token';
 import { User } from '../../../domain/User';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { AuthorizationPort } from '../../../domain/AuthorizationPort';
