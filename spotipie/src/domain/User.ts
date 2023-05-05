@@ -1,3 +1,7 @@
 export class User {
-	constructor(private id: string, private name: string, private email: string, private authToken: string) {}
+	constructor(private email: string, private name: string, private country: string, private access_token: string) {}
+
+	public static of(email: string, name: string, country: string, access_token: string): User {
+		return new User(email, name, country, access_token);
+	}
 }

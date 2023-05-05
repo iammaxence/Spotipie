@@ -7,16 +7,18 @@ import { Login } from '../../primary/pages/login/Login';
 import { NavBar } from '../../primary/pages/navbar/NavBar';
 import { Home } from '../../primary/pages/home/Home';
 import { AuthorizationAdapter } from '../authorization/AuthorizationAdapter';
+import { UserAdapter } from '../user/UserAdapter';
 
 export function Router() {
 	const axiosHttp = new AxiosHttp(axios.create({ baseURL: 'http://localhost:8080' }));
 	const authorizationAdapter = new AuthorizationAdapter(axiosHttp);
+	const userAdapter = new UserAdapter(axiosHttp);
 
 	return(
 		<AuthContextProvider>
 			<Routes>
-				<Route path="/" element={<Login authorizationAdapter={authorizationAdapter} />} />
-				<Route path="/login" element={<Login authorizationAdapter={authorizationAdapter} />} />
+				<Route path="/" element={<Login authorizationAdapter={authorizationAdapter} userAdapter={userAdapter} />} />
+				<Route path="/login" element={<Login authorizationAdapter={authorizationAdapter} userAdapter={userAdapter} />} />
 				<Route
 					path="/home"
 					element={

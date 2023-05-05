@@ -2,14 +2,17 @@ import React from 'react';
 import './Login.scss';
 import { useLoginHelper } from './LoginHelper';
 import { AuthorizationPort } from '../../../domain/AuthorizationPort';
+import { UserAdapter } from '../../../secondary/user/UserAdapter';
+import { UserPort } from '../../../domain/UserPort';
 
 interface LoginProps {
 	authorizationAdapter: AuthorizationPort
+	userAdapter: UserPort
 }
 
-export function Login({ authorizationAdapter }: LoginProps) {
+export function Login({ authorizationAdapter, userAdapter }: LoginProps) {
 
-	const { connexion } = useLoginHelper({ authorizationAdapter });
+	const { connexion } = useLoginHelper({ authorizationAdapter, userAdapter });
   
 	return (
 		<div className='login'>

@@ -1,5 +1,6 @@
 package com.spotipie.primary.request;
 
+import lombok.Builder;
 import lombok.ToString;
 
 @ToString
@@ -7,7 +8,8 @@ public class UserAuthorizationRequest {
   private final String clientId;
   private final String scope;
   private final String redirectUri;
-
+  
+  @Builder
   public UserAuthorizationRequest(String clientId, String scope, String redirectUri) {
     this.clientId = clientId;
     this.scope = scope;

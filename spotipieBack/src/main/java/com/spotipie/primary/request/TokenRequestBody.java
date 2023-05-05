@@ -1,11 +1,16 @@
 package com.spotipie.primary.request;
 
+import lombok.Builder;
+import lombok.ToString;
+
+@ToString
 public class TokenRequestBody {
   private String code;
   private String state;
   private String clientId;
   private String redirectUri;
 
+  @Builder
   public TokenRequestBody(String code, String state, String clientId, String redirectUri) {
       this.code = code;
       this.state = state;

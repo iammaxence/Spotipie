@@ -5,16 +5,18 @@ import { Token } from '../../../domain/Token';
 import { User } from '../../../domain/User';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { AuthorizationPort } from '../../../domain/AuthorizationPort';
+import { UserPort } from '../../../domain/UserPort';
 
 interface LoginHelperProps {
 	authorizationAdapter: AuthorizationPort
+	userAdapter: UserPort
 }
 
 export interface LoginResponse {
 	data: string;
 }
 
-export function useLoginHelper({ authorizationAdapter }: LoginHelperProps) {
+export function useLoginHelper({ authorizationAdapter, userAdapter }: LoginHelperProps) {
 	const { search } = useLocation();
 	const navigation = useNavigate();
 	const { login, logout, user } = useAuth();
@@ -58,17 +60,19 @@ export function useLoginHelper({ authorizationAdapter }: LoginHelperProps) {
 
 	async function getAndSetToken(code: string, state: string): Promise<void> {
 		const token: Token = await authorizationAdapter.getToken(code, state); 
-		setToken(token);
+		await setToken(token);
 		tokenExpiration();
 	}
 
 	function tokenExpiration(): void {
-		setTimeout(() => logout(), 10000);
+		const seconds = 3000;
+		setTimeout(() => logout(), seconds*100);
 	}
 
-	function setToken(token: Token): void {
+	async function setToken(token: Token): Promise<void> {
 		setItem('tokens',  JSON.stringify(token));
-		login(new User('test@mail.com', 'test', 'test@mail.com', token.getAccessToken()));
+		const user = await userAdapter.getUserProfile(token.getAccessToken());
+		login(user);
 	}
 
 	return {
