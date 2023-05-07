@@ -2,15 +2,16 @@ import { useEffect } from 'react';
 import { useUser } from './useUser';
 import { useLocalStorage } from './useLocalStorage';
 import { User } from '../../domain/User';
+import { UserFromLocalStorage } from '../../domain/UserFromLocalStorage';
 
 export const useAuth = () => {
 	const { user, addUser, removeUser } = useUser();
 	const { getItem } = useLocalStorage();
 
 	useEffect(() => {
-		const user = getItem('user');
 		if (user) {
-			addUser(JSON.parse(user));
+			const { email, name, country, access_token }: UserFromLocalStorage = JSON.parse(getItem('user')!);
+			addUser(User.of(email, name, country, access_token));
 		}
 	}, []);
 

@@ -1,0 +1,22 @@
+.link {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  border: solid 1px #2C2B3E;
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  background-color: #2C2B3E;
+  color: #9E85FF;
+
+  &:hover {
+    border-color: #9E85FF;
+  }
+
+  >span {
+    font-size: 0.75rem;
+  }
+  >img {
+    filter: invert(50%) sepia(88%) saturate(1343%) hue-rotate(217deg) brightness(102%) contrast(101%);
+  }
+}

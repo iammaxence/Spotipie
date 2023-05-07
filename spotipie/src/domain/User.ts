@@ -4,4 +4,12 @@ export class User {
 	public static of(email: string, name: string, country: string, access_token: string): User {
 		return new User(email, name, country, access_token);
 	}
+
+	public getName(): string {
+		return this.name;
+	}
+
+	public getEmail(): string {
+		return this.email;
+	}
 }

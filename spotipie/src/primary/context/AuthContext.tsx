@@ -1,6 +1,7 @@
 import React, { ReactElement, createContext, useEffect, useMemo, useState } from 'react';
 import { User } from '../../domain/User';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { UserFromLocalStorage } from '../../domain/UserFromLocalStorage';
 
 export interface AuthContextType {
 	user: User | null;
@@ -20,8 +21,8 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
 	useEffect(() => {
 		if (getItem('user')) {
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			const user = JSON.parse(getItem('user')!);
-			setUser(user);
+			const { email, name, country, access_token }: UserFromLocalStorage = JSON.parse(getItem('user')!);
+			setUser(User.of(email, name, country, access_token));
 		}
 	}, [token]);
  

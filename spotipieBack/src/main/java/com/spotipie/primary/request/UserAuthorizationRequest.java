@@ -1,14 +1,16 @@
 package com.spotipie.primary.request;
 
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @ToString
+@NoArgsConstructor
 public class UserAuthorizationRequest {
-  private final String clientId;
-  private final String scope;
-  private final String redirectUri;
-  
+  private String clientId;
+  private String scope;
+  private String redirectUri;
+
   @Builder
   public UserAuthorizationRequest(String clientId, String scope, String redirectUri) {
     this.clientId = clientId;
