@@ -14,7 +14,7 @@ export function SongCard({ artistName, title, numberOfListenning }: SongCardProp
 			<div className="song-card--text">
 				<span>{title}</span>
 				<span>{artistName}</span>
-				<span>{numberOfListenning} coutes</span>
+				<span>{numberOfListenning} Ecoutes</span>
 			</div>
 		</div>);
 }

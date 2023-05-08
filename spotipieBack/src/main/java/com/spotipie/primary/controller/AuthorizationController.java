@@ -25,6 +25,7 @@ public class AuthorizationController {
   private static final String CLIENT_ID_PARAM = "client_id";
   private static final String SCOPE_PARAM = "scope";
   private static final String REDIRECT_URI_PARAM = "redirect_uri";
+  private static final String SHOW_DIALOG = "show_dialog";
 
   private final AuthorizationService authorizationService;
 
@@ -32,10 +33,9 @@ public class AuthorizationController {
   private final TokenRequestBodyMapper tokenRequestBodyMapper;
 
   public AuthorizationController(
-    AuthorizationService authorizationService,
-    UserAuthorizationRequestMapper userAuthorizationRequestMapper,
-    TokenRequestBodyMapper tokenRequestBodyMapper
-  ) {
+      AuthorizationService authorizationService,
+      UserAuthorizationRequestMapper userAuthorizationRequestMapper,
+      TokenRequestBodyMapper tokenRequestBodyMapper) {
     this.authorizationService = authorizationService;
     this.userAuthorizationRequestMapper = userAuthorizationRequestMapper;
     this.tokenRequestBodyMapper = tokenRequestBodyMapper;
@@ -46,16 +46,17 @@ public class AuthorizationController {
     UserAuthorization authorization = userAuthorizationRequestMapper.userAuthorizationRequestToAuthorization(request);
 
     return buildAuthorizeUrl(authorization.getClientId(), authorization.getScope(),
-        authorization.getRedirectUri(), generateRandomString(16));
+        authorization.getRedirectUri(), generateRandomString(16), authorization.getShowDialog());
   }
 
   @PostMapping("/token")
   public ResponseEntity<Token> token(@RequestBody TokenRequestBody tokenRequestBody) {
 
-    AuthorizationCredentials authorizationCredentials = tokenRequestBodyMapper.toAuthorizationCredentials(tokenRequestBody);
+    AuthorizationCredentials authorizationCredentials = tokenRequestBodyMapper
+        .toAuthorizationCredentials(tokenRequestBody);
 
     return ResponseEntity.ok().body(authorizationService.getToken(authorizationCredentials));
-}
+  }
 
   private String generateRandomString(int length) {
     byte[] bytes = new byte[length];
@@ -63,13 +64,15 @@ public class AuthorizationController {
     return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
   }
 
-  private String buildAuthorizeUrl(String clientId, String scope, String redirectUri, String state) {
-    String query = String.format("%s=%s&%s=%s&%s=%s&%s=%s&%s=%s",
+  private String buildAuthorizeUrl(String clientId, String scope, String redirectUri, String state,
+      boolean showDialog) {
+    String query = String.format("%s=%s&%s=%s&%s=%s&%s=%s&%s=%s&%s=%s",
         "response_type", RESPONSE_TYPE,
         CLIENT_ID_PARAM, clientId,
         SCOPE_PARAM, scope,
         REDIRECT_URI_PARAM, redirectUri,
-        STATE, state);
+        STATE, state,
+        SHOW_DIALOG, showDialog);
     return SPOTIFY_AUTHORIZE_ENDPOINT + "?" + query;
   }
 

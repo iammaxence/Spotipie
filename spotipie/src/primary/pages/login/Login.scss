@@ -6,6 +6,23 @@
   gap: 2rem;
   padding: 20% 0;
   color: black;
+  background-color: #262A3E;
+
+  &--head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &--title {
+    font-size: 2.5rem;
+    color: white;
+  }
+
+  &--subtitle {
+    font-size: 0.8rem;
+    color: white;
+  }
 }
 .button {
   width: 10rem;

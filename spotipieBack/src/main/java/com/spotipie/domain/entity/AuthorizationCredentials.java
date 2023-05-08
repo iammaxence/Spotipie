@@ -1,48 +1,48 @@
 package com.spotipie.domain.entity;
 
 public class AuthorizationCredentials {
-  private String code;
-  private String state;
-  private String clientId;
-  private String redirectUri;
+    private String code;
+    private String state;
+    private String clientId;
+    private String redirectUri;
 
-  public AuthorizationCredentials(String code, String state, String clientId, String redirectUri) {
-    
-      this.code = code;
-      this.state = state;
-      this.clientId = clientId;
-      this.redirectUri = redirectUri;
-  }
+    public AuthorizationCredentials(String code, String state, String clientId, String redirectUri) {
 
-  public String getCode() {
-      return code;
-  }
+        this.code = code;
+        this.state = state;
+        this.clientId = clientId;
+        this.redirectUri = redirectUri;
+    }
 
-  public void setCode(String code) {
-      this.code = code;
-  }
+    public String getCode() {
+        return code;
+    }
 
-  public String getState() {
-      return state;
-  }
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-  public void setState(String state) {
-      this.state = state;
-  }
+    public String getState() {
+        return state;
+    }
 
-  public String getClientId() {
-      return clientId;
-  }
+    public void setState(String state) {
+        this.state = state;
+    }
 
-  public void setClientId(String clientId) {
-      this.clientId = clientId;
-  }
+    public String getClientId() {
+        return clientId;
+    }
 
-  public String getRedirectUri() {
-      return redirectUri;
-  }
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
 
-  public void setRedirectUri(String redirectUri) {
-      this.redirectUri = redirectUri;
-  }
+    public String getRedirectUri() {
+        return redirectUri;
+    }
+
+    public void setRedirectUri(String redirectUri) {
+        this.redirectUri = redirectUri;
+    }
 }

@@ -2,7 +2,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { useEffect } from 'react';
 import { Token } from '../../../domain/Token';
-import { User } from '../../../domain/User';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { AuthorizationPort } from '../../../domain/AuthorizationPort';
 import { UserPort } from '../../../domain/UserPort';
@@ -66,7 +65,7 @@ export function useLoginHelper({ authorizationAdapter, userAdapter }: LoginHelpe
 
 	function tokenExpiration(): void {
 		const seconds = 3000;
-		setTimeout(() => logout(), seconds*100);
+		setTimeout(() => logout(), seconds*1000);
 	}
 
 	async function setToken(token: Token): Promise<void> {

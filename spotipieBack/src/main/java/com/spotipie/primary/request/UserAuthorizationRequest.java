@@ -10,12 +10,14 @@ public class UserAuthorizationRequest {
   private String clientId;
   private String scope;
   private String redirectUri;
+  private boolean showDialog;
 
   @Builder
-  public UserAuthorizationRequest(String clientId, String scope, String redirectUri) {
+  public UserAuthorizationRequest(String clientId, String scope, String redirectUri, boolean showDialog) {
     this.clientId = clientId;
     this.scope = scope;
     this.redirectUri = redirectUri;
+    this.showDialog = showDialog;
   }
 
   public String getClientId() {
@@ -28,5 +30,9 @@ public class UserAuthorizationRequest {
 
   public String getRedirectUri() {
     return this.redirectUri;
+  }
+
+  public boolean getShowDialog() {
+    return this.showDialog;
   }
 }

@@ -20,7 +20,8 @@ export class AuthorizationAdapter implements AuthorizationPort {
 			code,
 			state,
 			clientId: '1d41a7bc4b7e491eb7951830ba5d4756',
-			redirectUri: 'http://localhost:1420/login'
+			redirectUri: 'http://localhost:1420/login',
+			show_dialog: true
 		});
 
 		if(response.status === 200) {

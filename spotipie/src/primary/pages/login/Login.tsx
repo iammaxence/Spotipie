@@ -2,7 +2,6 @@ import React from 'react';
 import './Login.scss';
 import { useLoginHelper } from './LoginHelper';
 import { AuthorizationPort } from '../../../domain/AuthorizationPort';
-import { UserAdapter } from '../../../secondary/user/UserAdapter';
 import { UserPort } from '../../../domain/UserPort';
 
 interface LoginProps {
@@ -16,7 +15,10 @@ export function Login({ authorizationAdapter, userAdapter }: LoginProps) {
   
 	return (
 		<div className='login'>
-			<h1 className="title">Welcome to SpotiPie</h1>
+			<div className="login--head">
+				<h1 className="login--title">Welcome to SpotiPie</h1>
+				<span className="login--subtitle">Gain insights into your Spotify listening habits</span>
+			</div>
 			<button className="button" onClick={connexion}>Login</button>
 		</div>
 	);
