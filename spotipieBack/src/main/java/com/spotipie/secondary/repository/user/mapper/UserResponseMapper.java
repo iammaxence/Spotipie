@@ -7,8 +7,8 @@ import org.mapstruct.factory.Mappers;
 
 import com.spotipie.domain.entity.Image;
 import com.spotipie.domain.entity.User;
-import com.spotipie.secondary.repository.user.response.ImageResponse;
-import com.spotipie.secondary.repository.user.response.UserResponse;
+import com.spotipie.secondary.repository.user.response.user.ImageResponse;
+import com.spotipie.secondary.repository.user.response.user.UserResponse;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.WARN)
 public interface UserResponseMapper {

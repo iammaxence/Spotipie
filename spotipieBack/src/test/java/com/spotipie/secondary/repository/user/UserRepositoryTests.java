@@ -23,7 +23,7 @@ import org.springframework.web.client.RestTemplate;
 import com.spotipie.domain.entity.User;
 import com.spotipie.domain.exception.HttpExceptionHandler;
 import com.spotipie.secondary.repository.user.mapper.UserResponseMapper;
-import com.spotipie.secondary.repository.user.response.UserResponse;
+import com.spotipie.secondary.repository.user.response.user.UserResponse;
 
 @ExtendWith(MockitoExtension.class)
 public class UserRepositoryTests {

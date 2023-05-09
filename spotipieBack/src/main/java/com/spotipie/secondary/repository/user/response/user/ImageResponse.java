@@ -1,4 +1,4 @@
-package com.spotipie.secondary.repository.user.response;
+package com.spotipie.secondary.repository.user.response.user;
 
 public class ImageResponse {
     private String url;

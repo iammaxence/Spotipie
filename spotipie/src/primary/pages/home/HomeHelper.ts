@@ -10,12 +10,12 @@ interface HomeHelperProps {
 
 export function useHomeHelper({ axiosHttp }: HomeHelperProps) {
 	const { user, isConnected } = useAuth();
-	const navigate = useNavigate();
+	const navigation = useNavigate();
 	const [topSongs, setTopSongs] = useState<Song[]>([Song.of('wejdene', 'coco', 12), Song.of('wejdene', 'tati', 12), Song.of('wejdene', 'toto', 12)]);
 
 	useEffect(() => {
 		if(!isConnected()) {
-			navigate('/login');		
+			navigation('/login');		
 		}
 	}, [user]);
 

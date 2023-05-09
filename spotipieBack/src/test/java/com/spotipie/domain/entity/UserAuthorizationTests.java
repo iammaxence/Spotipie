@@ -12,7 +12,7 @@ class UserAuthorizationTests {
 
   @BeforeEach
   void setUp() {
-    userAuthorization = new UserAuthorization("client123", "read write", "https://example.com/callback");
+    userAuthorization = new UserAuthorization("client123", "read write", "https://example.com/callback", false);
   }
 
   @Nested

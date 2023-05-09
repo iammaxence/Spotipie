@@ -1,8 +1,8 @@
 import { renderHook, waitFor } from '@testing-library/react';
 import { describe, expect, vi } from 'vitest';
-import { AxiosHttpFixture } from '../../../config/AxiosHttpFixture';
 import { useHomeHelper } from '../../../../src/primary/pages/home/HomeHelper';
 import { Song } from '../../../../src/domain/Song';
+import { AxiosHttpFixture } from '../../../secondary/http/AxiosHttpFixture';
 
 vi.mock('../../src/config/AxiosHttp'); 
 const axiosHttp = AxiosHttpFixture({
@@ -19,6 +19,10 @@ const axiosHttp = AxiosHttpFixture({
 	})) as any,
 });
 
+vi.mock('react-router-dom', () => ({
+	useNavigate: () => vi.fn(),
+}));
+				
 describe('useHomeHelper', () => {
 	it('Should fetch top songs', async () => {
 		const { result, rerender } = renderHook(() => useHomeHelper({ axiosHttp }));
@@ -27,9 +31,9 @@ describe('useHomeHelper', () => {
     
 		await waitFor(() => {
 			expect(result.current.topSongs).toEqual([
-				Song.of('artist1', 'song1', 2),
-				Song.of('artist2', 'song2', 1),
-				Song.of('artist3', 'song3', 8),
+				Song.of('wejdene', 'coco', 12),
+				Song.of('wejdene', 'tati', 12),
+				Song.of('wejdene', 'toto', 12),
 			]);
 		});
 	});

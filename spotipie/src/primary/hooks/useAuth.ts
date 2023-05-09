@@ -21,6 +21,9 @@ export const useAuth = () => {
 
 	const logout = () => {
 		removeUser();
+		//const spotifyLogoutUrl = 'https://accounts.spotify.com/fr/logout';
+		//document.location.href = spotifyLogoutUrl+'?continue=http://localhost:8080/';
+		// I need to call this url to really logout
 	};
 
 	const isConnected = () => {

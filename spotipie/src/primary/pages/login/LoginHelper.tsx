@@ -23,7 +23,7 @@ export function useLoginHelper({ authorizationAdapter, userAdapter }: LoginHelpe
 
 	useEffect(() => {
 		const { code, state } = getUrlParams();
-
+		console.log(code);
 		if(!isUserConnected()) {
 			if(code && state) {
 				getAndSetToken(code, state);
@@ -45,6 +45,7 @@ export function useLoginHelper({ authorizationAdapter, userAdapter }: LoginHelpe
 
 	const connexion = async () => {
 		const redirectUrl = await authorizationAdapter.getAuthorizationCode();
+		console.log(redirectUrl);
 		window.location.replace(redirectUrl);
 	};
 
