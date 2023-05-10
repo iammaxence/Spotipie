@@ -4,6 +4,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.Assert.assertArrayEquals;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
@@ -21,15 +22,21 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.spotipie.domain.entity.User;
+import com.spotipie.domain.entity.artist.Artist;
+import com.spotipie.domain.entity.song.Song;
+import com.spotipie.domain.entity.song.SongFixture;
 import com.spotipie.domain.exception.HttpExceptionHandler;
+import com.spotipie.secondary.repository.user.mapper.TopSongResponseMapper;
 import com.spotipie.secondary.repository.user.mapper.UserResponseMapper;
+import com.spotipie.secondary.repository.user.response.topsong.ItemResponseFixture;
+import com.spotipie.secondary.repository.user.response.topsong.TopSongResponse;
 import com.spotipie.secondary.repository.user.response.user.UserResponse;
 
 @ExtendWith(MockitoExtension.class)
 public class UserRepositoryTests {
 
   private static final String PROFILE_URL = "https://api.spotify.com/v1/me";
-
+  private static final String USER_TOP_TRACKS_URL= "https://api.spotify.com/v1/me/top/tracks";
   
   UserRepository userRepository;
 
@@ -39,7 +46,8 @@ public class UserRepositoryTests {
   @BeforeEach
   void init() {
     UserResponseMapper userResponseMapper = Mappers.getMapper(UserResponseMapper.class);
-    userRepository = new UserRepository(restTemplate, userResponseMapper);
+    TopSongResponseMapper topSongResponseMapper = Mappers.getMapper(TopSongResponseMapper.class);
+    userRepository = new UserRepository(restTemplate, userResponseMapper, topSongResponseMapper);
   }
 
   @Test
@@ -64,5 +72,20 @@ public class UserRepositoryTests {
     assertThatExceptionOfType(HttpExceptionHandler.class)
       .isThrownBy(() -> userRepository.getUserProfile("token"))
         .withMessage("401 Unauthorized");
+  }
+
+  @Test
+  void should_get_top_song() {
+    TopSongResponse topSongResponseList = TopSongResponse.builder().items(ItemResponseFixture.createDefaultList()).build();
+    String params = "?time_range=long_term&limit=3&offset=0";
+    when(restTemplate.exchange(eq(USER_TOP_TRACKS_URL+params), eq(HttpMethod.GET), any(), eq(TopSongResponse.class)))
+    .thenReturn(ResponseEntity.ok(topSongResponseList));
+    
+    List<Song> songListResponse = userRepository.getTopSongs("fake_token", "long_term", 3, 0);
+    
+    List<Song> expectedSongList = List.of(
+     SongFixture.createDefault().build()
+    );
+    assertArrayEquals(songListResponse.toArray(), expectedSongList.toArray());
   }
 }

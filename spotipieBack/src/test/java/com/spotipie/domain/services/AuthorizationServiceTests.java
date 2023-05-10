@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.spotipie.domain.entity.AuthorizationCredentials;
-import com.spotipie.domain.services.AuthorizationService;
 import com.spotipie.secondary.repository.AuthorizationRespository;
 
 @ExtendWith(MockitoExtension.class)

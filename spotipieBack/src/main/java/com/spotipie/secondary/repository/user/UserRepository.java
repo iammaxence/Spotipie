@@ -10,9 +10,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import com.spotipie.domain.entity.Song;
 import com.spotipie.domain.entity.User;
+import com.spotipie.domain.entity.song.Song;
 import com.spotipie.domain.exception.HttpExceptionHandler;
+import com.spotipie.secondary.repository.user.mapper.TopSongResponseMapper;
 import com.spotipie.secondary.repository.user.mapper.UserResponseMapper;
 import com.spotipie.secondary.repository.user.response.topsong.TopSongResponse;
 import com.spotipie.secondary.repository.user.response.user.UserResponse;
@@ -23,13 +24,15 @@ import lombok.extern.slf4j.Slf4j;
 public class UserRepository {
   private final RestTemplate restTemplate;
   private static final String PROFILE_URL = "https://api.spotify.com/v1/me";
-  private static final String USER_TOP_TRACKS= "https://api.spotify.com/v1/me/top/tracks";
-
+  private static final String USER_TOP_TRACKS_URL= "https://api.spotify.com/v1/me/top/tracks";
+  
+  private final TopSongResponseMapper topSongResponseMapper;
   private final UserResponseMapper userResponseMapper;
   
-  public UserRepository(RestTemplate restTemplate, UserResponseMapper userResponseMapper) {
+  public UserRepository(RestTemplate restTemplate, UserResponseMapper userResponseMapper, TopSongResponseMapper topSongResponseMapper) {
     this.restTemplate = restTemplate;
     this.userResponseMapper = userResponseMapper;
+    this.topSongResponseMapper= topSongResponseMapper;
   }
 
   
@@ -60,23 +63,17 @@ public class UserRepository {
       headers.set("Authorization", authHeader);
 
       ResponseEntity<TopSongResponse> topSongresponse = restTemplate.exchange(
-        USER_TOP_TRACKS+buildTopSongQueryParams(timeRange, numberOfItems, offset),
+        USER_TOP_TRACKS_URL+buildTopSongQueryParams(timeRange, numberOfItems, offset),
         HttpMethod.GET,
         new HttpEntity<>(headers),
         TopSongResponse.class
       );
 
-      ResponseEntity<String> test = restTemplate.exchange(
-        USER_TOP_TRACKS+buildTopSongQueryParams(timeRange, numberOfItems, offset),
-        HttpMethod.GET,
-        new HttpEntity<>(headers),
-        String.class
-      );
-
-      log.info(topSongresponse.getStatusCode().toString());
-      log.info(topSongresponse.getBody().toString());
-      log.info(test.toString());
-
+      
+      if(topSongresponse.getStatusCode().is2xxSuccessful() && topSongresponse.getBody()!= null) {
+        log.info(topSongresponse.getBody().toString());
+        return topSongResponseMapper.toSongList(topSongresponse.getBody().getItems());
+      }
       return List.of();
     } catch(HttpClientErrorException httpClientErrorException) {
       throw new HttpExceptionHandler(httpClientErrorException.getStatusCode(), httpClientErrorException.getMessage());

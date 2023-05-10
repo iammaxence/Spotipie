@@ -8,7 +8,7 @@ With this app, you can connect your Spotify account and get detailed statistics 
 ## Board
 
 - Add env variables and make it work
-- Make tests for UserAdapter
+- Add real logout
 
 ## About
 Build using Tauri, React, Java and Typescript.

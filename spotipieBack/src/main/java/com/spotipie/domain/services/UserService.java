@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.spotipie.domain.entity.Song;
 import com.spotipie.domain.entity.User;
+import com.spotipie.domain.entity.song.Song;
 import com.spotipie.secondary.repository.user.UserRepository;
 
 @Service

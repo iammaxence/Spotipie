@@ -1,9 +1,11 @@
 package com.spotipie.primary.request;
 
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @ToString
+@NoArgsConstructor
 public class TokenRequestBody {
   private String code;
   private String state;

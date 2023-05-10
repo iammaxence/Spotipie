@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spotipie.domain.entity.Song;
 import com.spotipie.domain.entity.User;
+import com.spotipie.domain.entity.song.Song;
 import com.spotipie.domain.services.UserService;
 
 @RestController

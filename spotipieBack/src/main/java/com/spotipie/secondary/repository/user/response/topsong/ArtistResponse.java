@@ -1,21 +1,20 @@
 package com.spotipie.secondary.repository.user.response.topsong;
 
-import com.spotipie.domain.entity.Image;
-
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @ToString
 @NoArgsConstructor
-public class Album {
+@Setter
+@Getter
+public class ArtistResponse {
   private String name;
-  private Image[] images;
-
 
   @Builder
-  public Album(String name, Image[] images) {
+  public ArtistResponse(String name) {
     this.name = name;
-    this.images = images;
   }
 }

@@ -1,11 +1,15 @@
-package com.spotipie.secondary.repository.user.response.topsong;
+package com.spotipie.domain.entity.artist;
 
 import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 @ToString
-@NoArgsConstructor
+@EqualsAndHashCode
+@Getter
+@Setter
 public class Artist {
   private String name;
 

@@ -2,6 +2,8 @@ package com.spotipie.secondary.repository.user.response.user;
 
 import java.util.List;
 
+import com.spotipie.secondary.repository.user.response.ImageResponse;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;

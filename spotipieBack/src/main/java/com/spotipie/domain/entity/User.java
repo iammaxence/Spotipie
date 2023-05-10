@@ -3,6 +3,7 @@ package com.spotipie.domain.entity;
 import java.util.List;
 
 import com.spotipie.domain.assertions.AssertMissingMandatoryValue;
+import com.spotipie.domain.entity.Image.Image;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

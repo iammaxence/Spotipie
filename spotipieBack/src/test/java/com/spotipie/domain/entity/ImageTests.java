@@ -3,6 +3,8 @@ package com.spotipie.domain.entity;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 
+import com.spotipie.domain.entity.Image.Image;
+
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
