@@ -1,0 +1,45 @@
+.select {
+  padding-bottom: 2rem;
+
+  &--title {
+    color: white;
+  }
+}
+
+.custom-select-container {
+  position: absolute;
+  color: white;
+  background-color: #1E1F25;
+  padding: 0.25rem 0.75rem;
+  border: solid 1px;
+  width: 20%;
+}
+
+.selected-text {
+  padding: 0.5rem 0;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+
+
+li {
+  list-style-type: none;
+  padding: 0.5rem 0;
+  background: #1E1F25;
+  border-bottom: 1px solid white;
+  outline: none;
+  cursor: pointer;
+}
+
+li:last-child {
+  border: none;
+}
+
+li:hover {
+  background-color: white;
+  color: #1E1F25;
+}

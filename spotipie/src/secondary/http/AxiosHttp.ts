@@ -4,8 +4,12 @@ import { HttpPort } from '../../domain/HttpPort';
 export class AxiosHttp implements HttpPort{
 	constructor(private axiosInstance: AxiosInstance) {}
 
-	async get<Result>(uri: string): Promise<AxiosResponse<Result>> {
-		return this.axiosInstance.get<Result>(uri);
+	async get<Result>(uri: string, token?: string): Promise<AxiosResponse<Result>> {
+		return this.axiosInstance.get<Result>(uri, {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		});
 	}
 
 	async put<Result, Payload = never>(uri: string, data?: Payload): Promise<AxiosResponse<Result>> {

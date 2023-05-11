@@ -3,6 +3,7 @@ import './Home.scss';
 import { useHomeHelper } from './HomeHelper';
 import { HttpPort } from '../../../domain/HttpPort';
 import { SongCard } from './song-card/SongCard';
+import { Select } from './select/Select';
 
 interface HomeProps {
   axiosHttp: HttpPort
@@ -10,18 +11,19 @@ interface HomeProps {
 
 export function Home({ axiosHttp }: HomeProps) {
 
-	const { topSongs } = useHomeHelper({ axiosHttp });
+	const { topSongs, selectOptions, setSelectedOptions } = useHomeHelper({ axiosHttp });
 
 	return (
 		<div className="home">
-			<h1 className='home--title'> Top 3 listening </h1>
+			<h1 className='home--title'> Top 10 listening </h1>
+			<Select selection={setSelectedOptions} options={selectOptions}/>
 			<div className="home--songs" >
 				{topSongs.map((song) => (
 					<SongCard
 						key={song.getTitle()}
-						artistName={song.getArtistName()}
+						artists={song.getArtists()}
 						title={song.getTitle()}
-						numberOfListenning={song.getNumberOfListenning()}
+						albumName={song.getAlbumName()}
 					/>))
 				}
 			</div>

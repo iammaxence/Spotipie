@@ -1,6 +1,8 @@
 .song-card {
   display: inline-flex;
   gap: 1rem;
+  justify-content: center;
+  align-items: center;
 
   &--img {
     width: 100px;
