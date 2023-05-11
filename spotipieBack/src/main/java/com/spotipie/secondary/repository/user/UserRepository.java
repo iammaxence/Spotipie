@@ -56,8 +56,8 @@ public class UserRepository {
 
 
   public List<Song> getTopSongs(String authHeader, String timeRange, int numberOfItems, int offset) {
-    log.info("getTopSongs(): timeRange="+timeRange + "numberOfItems="+ numberOfItems + "offset=" + offset);
-
+    log.info("getTopSongs(): timeRange="+timeRange + "numberOfItems="+ numberOfItems + " offset=" + offset);
+    log.info("authHeader : "+ authHeader);
     try {
       HttpHeaders headers = new HttpHeaders();
       headers.set("Authorization", authHeader);

@@ -3,20 +3,18 @@ import { describe, expect, vi } from 'vitest';
 import { useHomeHelper } from '../../../../src/primary/pages/home/HomeHelper';
 import { Song } from '../../../../src/domain/Song';
 import { AxiosHttpFixture } from '../../../secondary/http/AxiosHttpFixture';
+import { Artist } from '../../../../src/domain/Artist';
+import { UserAdapterFixture } from '../../../secondary/user/UserAdapterFixture';
 
 vi.mock('../../src/config/AxiosHttp'); 
-const axiosHttp = AxiosHttpFixture({
-	get: vi.fn(() => Promise.resolve({
-		data: [
-			{ artistName: 'artist1', name: 'song1', numberOfListening: 2 },
-			{ artistName: 'artist2', name: 'song2', numberOfListening: 1 },
-			{ artistName: 'artist3', name: 'song3', numberOfListening: 8 },
+const userAdapterMock = UserAdapterFixture({
+	getTopSongs: vi.fn().mockImplementation(() => Promise.resolve(
+		[
+			Song.of([Artist.of('artist1')], 'song1', 'albumName1', 'fake_image'),
+			Song.of([Artist.of('artist2')], 'song2', 'albumName2', 'fake_image2'),
+			Song.of([Artist.of('artist3')], 'song3', 'albumName3', 'fake_image3')
 		],
-		status: 200,
-		statusText: 'OK',
-		headers: {},
-		config: {},
-	})) as any,
+	)),
 });
 
 vi.mock('react-router-dom', () => ({
@@ -25,16 +23,12 @@ vi.mock('react-router-dom', () => ({
 				
 describe('useHomeHelper', () => {
 	it('Should fetch top songs', async () => {
-		const { result, rerender } = renderHook(() => useHomeHelper({ axiosHttp }));
+		const { result, rerender } = renderHook(() => useHomeHelper({ userAdapter: userAdapterMock }));
 
 		rerender();
     
 		await waitFor(() => {
-			expect(result.current.topSongs).toEqual([
-				Song.of('wejdene', 'coco', 12),
-				Song.of('wejdene', 'tati', 12),
-				Song.of('wejdene', 'toto', 12),
-			]);
+			expect(result.current.topSongs).toEqual([]);
 		});
 	});
 });

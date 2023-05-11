@@ -32,11 +32,11 @@ describe('AxiosHttp', () => {
 	describe('get', () => {
 		it('should call axiosInstance.get with the URI', async () => {
 			const uri = 'https://example.com';
-			mockAxiosInstance.get.mockResolvedValueOnce(mockAxiosResponse);
+			vi.spyOn(mockAxiosInstance, 'get').mockResolvedValueOnce(mockAxiosResponse);
   
-			await axiosHttp.get(uri);
-  
-			expect(mockAxiosInstance.get).toHaveBeenCalledWith(uri);
+			await axiosHttp.get(uri, { headers: { Authorization: 'Bearer' } });
+
+			expect(mockAxiosInstance.get).toHaveBeenCalledWith(uri, { headers: { Authorization: 'Bearer' } });
 		});
   
 		it('should return the AxiosResponse', async () => {

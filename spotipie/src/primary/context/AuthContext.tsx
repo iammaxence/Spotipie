@@ -21,8 +21,8 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
 	useEffect(() => {
 		if (getItem('user')) {
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			const { email, name, country, access_token }: UserFromLocalStorage = JSON.parse(getItem('user')!);
-			setUser(User.of(email, name, country, access_token));
+			const { email, name, country, accessToken }: UserFromLocalStorage = JSON.parse(getItem('user')!);
+			setUser(User.of(email, name, country, accessToken));
 		}
 	}, [token]);
  

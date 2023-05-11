@@ -1,17 +1,17 @@
 import React from 'react';
 import './Home.scss';
 import { useHomeHelper } from './HomeHelper';
-import { HttpPort } from '../../../domain/HttpPort';
 import { SongCard } from './song-card/SongCard';
 import { Select } from './select/Select';
+import { UserPort } from '../../../domain/UserPort';
 
 interface HomeProps {
-  axiosHttp: HttpPort
+  userAdapter: UserPort
 }
 
-export function Home({ axiosHttp }: HomeProps) {
+export function Home({ userAdapter }: HomeProps) {
 
-	const { topSongs, selectOptions, setSelectedOptions } = useHomeHelper({ axiosHttp });
+	const { topSongs, selectOptions, setSelectedOptions } = useHomeHelper({ userAdapter });
 
 	return (
 		<div className="home">
@@ -24,6 +24,7 @@ export function Home({ axiosHttp }: HomeProps) {
 						artists={song.getArtists()}
 						title={song.getTitle()}
 						albumName={song.getAlbumName()}
+						urlImage={song.getImage()}
 					/>))
 				}
 			</div>

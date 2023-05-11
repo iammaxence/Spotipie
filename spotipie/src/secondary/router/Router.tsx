@@ -24,7 +24,7 @@ export function Router() {
 					element={
 						<Fragment>
 							<NavBar />
-							<Home axiosHttp={axiosHttp}/>
+							<Home userAdapter={userAdapter}/>
 						</Fragment>
 					}
 				/>

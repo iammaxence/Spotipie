@@ -14,8 +14,14 @@ export class UserAdapter implements UserPort {
 		return toUser(userResponse, access_token);
 	}
 
-	async getTopSongs(timeRange: string, limit: string, offset: string): Promise<Song[]> {
-		const topSongResponseList = (await this.axiosHttp.get<TopSongResponse[]>(`/user/top?time_range=${timeRange}&limit=${limit}&offset=${offset}`)).data;
+	async getTopSongs(accessToken: string, timeRange: string, limit: number, offset: number): Promise<Song[]> {
+		const topSongResponseList = (await this.axiosHttp.get<TopSongResponse[]>(
+			`/user/top?timeRange=${timeRange}&numberOfItems=${limit}&offset=${offset}`,
+			{
+				headers: {
+					'Authorization': `Bearer ${accessToken}`
+				}
+			})).data;
 		return toSongList(topSongResponseList);
 	}
 }

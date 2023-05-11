@@ -25,7 +25,7 @@ describe('AuthorizationAdapter', () => {
 		expect(axiosHttp.post).toHaveBeenCalledWith('/login', {
 			clientId: '1d41a7bc4b7e491eb7951830ba5d4756',
 			redirectUri: 'http://localhost:1420/login',
-			scope: 'user-read-private user-read-email',
+			scope: 'user-read-private user-read-email user-top-read',
 		});
 	});
 

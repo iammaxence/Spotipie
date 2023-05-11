@@ -1,15 +1,13 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
-import { HttpPort } from '../../domain/HttpPort';
+import { AxiosConfig, HttpPort } from '../../domain/HttpPort';
 
-export class AxiosHttp implements HttpPort{
+
+
+export class AxiosHttp implements HttpPort {
 	constructor(private axiosInstance: AxiosInstance) {}
 
-	async get<Result>(uri: string, token?: string): Promise<AxiosResponse<Result>> {
-		return this.axiosInstance.get<Result>(uri, {
-			headers: {
-				Authorization: `Bearer ${token}`
-			}
-		});
+	async get<Result>(uri: string, config?: AxiosConfig): Promise<AxiosResponse<Result>> {
+		return this.axiosInstance.get<Result>(uri, config);
 	}
 
 	async put<Result, Payload = never>(uri: string, data?: Payload): Promise<AxiosResponse<Result>> {

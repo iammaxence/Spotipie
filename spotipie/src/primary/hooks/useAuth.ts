@@ -10,8 +10,8 @@ export const useAuth = () => {
 
 	useEffect(() => {
 		if (user) {
-			const { email, name, country, access_token }: UserFromLocalStorage = JSON.parse(getItem('user')!);
-			addUser(User.of(email, name, country, access_token));
+			const { email, name, country, accessToken }: UserFromLocalStorage = JSON.parse(getItem('user')!);
+			addUser(User.of(email, name, country, accessToken));
 		}
 	}, []);
 

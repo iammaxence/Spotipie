@@ -18,4 +18,8 @@ export class Song {
 	public getAlbumName(): string {
 		return this.albumName;
 	}
+
+	public getImage(): string {
+		return this.image;
+	}
 }

@@ -1,19 +1,22 @@
 import { useEffect, useState } from 'react';
-import { HttpPort } from '../../../domain/HttpPort';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { Song } from '../../../domain/Song';
 import { Artist } from '../../../domain/Artist';
 import { TimeRangeEnum } from '../../../domain/TimeRange';
 import { Option } from './select/Option';
+import { UserPort } from '../../../domain/UserPort';
 
 interface HomeHelperProps {
-  axiosHttp: HttpPort
+  userAdapter: UserPort
 }
 
-export function useHomeHelper({ axiosHttp }: HomeHelperProps) {
+export function useHomeHelper({ userAdapter }: HomeHelperProps) {
 	const { user, isConnected } = useAuth();
 	const navigation = useNavigate();
+
+	const NUMBER_OF_SONGS = 10;
+	const OFFSET = 0;
 
 	const selectOptions: Option[] = [
 		{ id: TimeRangeEnum.Long, name: 'All time' },
@@ -22,18 +25,7 @@ export function useHomeHelper({ axiosHttp }: HomeHelperProps) {
 	];
 	const [selectedOption, setSelectedOptions] = useState<Option>(selectOptions[0]);
 
-	const [topSongs, setTopSongs] = useState<Song[]>([
-		Song.of([Artist.of('Drake')], 'God\'s Plan', 'Scorpion', ''),
-		Song.of([Artist.of('Drake')], 'One dance', 'Views', ''),
-		Song.of([Artist.of('Drake')], 'Rich Flex', 'Her Loss', ''),
-		Song.of([Artist.of('Drake')], 'One dance', 'Views', ''),
-		Song.of([Artist.of('Drake')], 'Rich Flex', 'Her Loss', ''),
-		Song.of([Artist.of('Drake')], 'Rich Flex', 'Her Loss', ''),
-		Song.of([Artist.of('Drake')], 'Rich Flex', 'Her Loss', ''),
-		Song.of([Artist.of('Drake')], 'Rich Flex', 'Her Loss', ''),
-		Song.of([Artist.of('Drake')], 'Rich Flex', 'Her Loss', ''),
-		Song.of([Artist.of('Drake')], 'Rich Flex', 'Her Loss', ''),
-	]);
+	const [topSongs, setTopSongs] = useState<Song[]>([]);
 
 	useEffect(() => {
 		if(!isConnected()) {
@@ -42,8 +34,15 @@ export function useHomeHelper({ axiosHttp }: HomeHelperProps) {
 	}, [user]);
 
 	useEffect(() => {
-		console.log(selectedOption);
+		if(user) {
+			getTopSongs();
+		}
 	}, [selectedOption]);
+
+	async function getTopSongs(): Promise<void> {
+		const topSongs = await userAdapter.getTopSongs(user!.getAccessToken(),selectedOption.id, NUMBER_OF_SONGS, OFFSET);
+		setTopSongs(topSongs);
+	}
 
 	return {
 		topSongs,

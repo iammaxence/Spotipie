@@ -4,6 +4,7 @@ import { UserPort } from '../../../src/domain/UserPort';
 export const UserAdapterFixture = (options: Partial<UserPort> = {}): UserPort => {
 	const userAdapterMock = {
 		getUserProfile: vi.fn(),
+		getTopSongs: vi.fn(),
 		...options
 	};
 	return userAdapterMock;

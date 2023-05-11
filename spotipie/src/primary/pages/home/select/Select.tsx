@@ -20,7 +20,9 @@ export function Select({ selection, options }: SelectProps) {
 	function handleClickOutside(e:any) {
 		if (
 			!e.target.classList.contains('custom-select-option') &&
-      !e.target.classList.contains('selected-text')
+      !e.target.classList.contains('selected-text') &&
+			!e.target.classList.contains('chevron') &&
+			!e.target.classList.contains('option-name') 
 		) {
 			setShowOptionList(false);
 		}
@@ -61,7 +63,8 @@ export function Select({ selection, options }: SelectProps) {
 					className={showOptionList ? 'selected-text active' : 'selected-text'}
 					onClick={handleListDisplay}
 				>
-					{defaultOption.name}
+					<span className="option-name">{defaultOption.name}</span>
+					<span className={showOptionList ? 'chevron bottom' : 'chevron'}></span>
 				</div>
 				{showOptionList && (
 					<ul className="select-options">
