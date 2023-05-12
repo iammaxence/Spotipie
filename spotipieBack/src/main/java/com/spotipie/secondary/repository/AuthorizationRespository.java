@@ -15,7 +15,6 @@ import com.spotipie.domain.entity.Token;
 import com.spotipie.domain.exception.HttpExceptionHandler;
 import com.spotipie.primary.mapper.TokenResponseMapper;
 import com.spotipie.primary.request.TokenRequest;
-import com.spotipie.primary.request.TokenRequest.TokenRequestBuilder;
 import com.spotipie.primary.response.TokenResponse;
 
 @Repository
@@ -23,6 +22,7 @@ public class AuthorizationRespository {
 
   private static final String AUTH_URL = "https://accounts.spotify.com/api/token";
   private static final String CLIENT_SECRET = ""; // todo : remove when push
+  private static final String GRANT_TYPE = "authorization_code";
 
   private final RestTemplate restTemplate;
   private final TokenResponseMapper tokenResponseMapper;
@@ -35,8 +35,11 @@ public class AuthorizationRespository {
   }
 
   public Token getToken(AuthorizationCredentials authorizationCredentials) {
-    TokenRequest tokenRequest = new TokenRequestBuilder().setCode(authorizationCredentials.getCode())
-        .setRedirectUri(authorizationCredentials.getRedirectUri()).setGrantType("authorization_code").build();
+    TokenRequest tokenRequest = TokenRequest.builder()
+      .code(authorizationCredentials.getCode())
+      .redirect_uri(authorizationCredentials.getRedirectUri())
+      .grant_type(GRANT_TYPE).build();
+
 
     HttpHeaders authHeaders = new HttpHeaders();
     authHeaders.set("Authorization", "Basic " + Base64.getEncoder()

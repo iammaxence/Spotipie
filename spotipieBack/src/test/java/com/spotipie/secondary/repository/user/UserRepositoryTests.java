@@ -63,7 +63,7 @@ public class UserRepositoryTests {
   }
 
   @Test
-  void testGetUserProfileError() {
+  void test_get_user_profile_error() {
     HttpClientErrorException exception = new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "Unauthorized");
 
     when(restTemplate.exchange(eq(PROFILE_URL), eq(HttpMethod.GET), any(), eq(UserResponse.class)))
@@ -75,7 +75,7 @@ public class UserRepositoryTests {
   }
 
   @Test
-  void should_get_top_song() {
+  void should_get_top_songs() {
     TopSongResponse topSongResponseList = TopSongResponse.builder().items(ItemResponseFixture.createDefaultList()).build();
     String params = "?time_range=long_term&limit=3&offset=0";
     when(restTemplate.exchange(eq(USER_TOP_TRACKS_URL+params), eq(HttpMethod.GET), any(), eq(TopSongResponse.class)))
@@ -87,5 +87,28 @@ public class UserRepositoryTests {
      SongFixture.createDefault().build()
     );
     assertArrayEquals(songListResponse.toArray(), expectedSongList.toArray());
+  }
+
+  @Test
+  void should_return_empty_top_songs_when_body_is_null() {
+    String params = "?time_range=long_term&limit=3&offset=0";
+    when(restTemplate.exchange(eq(USER_TOP_TRACKS_URL+params), eq(HttpMethod.GET), any(), eq(TopSongResponse.class)))
+    .thenReturn(ResponseEntity.ok(null));
+    
+    List<Song> songListResponse = userRepository.getTopSongs("fake_token", "long_term", 3, 0);
+    
+    assertArrayEquals(songListResponse.toArray(), List.of().toArray());
+  }
+
+  @Test
+  void test_get_top_songs_error() {
+    HttpClientErrorException exception = new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "Unauthorized");
+    String params = "?time_range=long_term&limit=3&offset=0";
+    when(restTemplate.exchange(eq(USER_TOP_TRACKS_URL+params), eq(HttpMethod.GET), any(), eq(TopSongResponse.class)))
+    .thenThrow(exception);
+
+    assertThatExceptionOfType(HttpExceptionHandler.class)
+      .isThrownBy(() -> userRepository.getTopSongs("fake_token", "long_term", 3, 0))
+        .withMessage("401 Unauthorized");
   }
 }

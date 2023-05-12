@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @Setter
 public class Artist {
-  private String name;
+  private final String name;
 
   @Builder
   public Artist(String name) {

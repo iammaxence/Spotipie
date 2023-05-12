@@ -22,10 +22,10 @@ public class Song {
 
   @Builder
   public Song(List<Artist> artists, String title, String albumName, List<Image> urlImages) {
-    AssertMissingMandatoryValue.verify("artists", artists);
+    AssertMissingMandatoryValue.verifyArray("artists", artists);
     AssertMissingMandatoryValue.verify("title", title);
     AssertMissingMandatoryValue.verify("albumName", albumName);
-    AssertMissingMandatoryValue.verify("urlImages", urlImages);
+    AssertMissingMandatoryValue.verifyArray("urlImages", urlImages);
 
     this.artists = artists;
     this.title = title;

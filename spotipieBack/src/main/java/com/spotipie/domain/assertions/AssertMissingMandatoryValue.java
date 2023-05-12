@@ -6,9 +6,7 @@ import com.spotipie.domain.exception.MissingMandatoryValueException;
 
 public class AssertMissingMandatoryValue {
 
-  private AssertMissingMandatoryValue() {
-    throw new IllegalStateException("Utility class");
-  }
+  private AssertMissingMandatoryValue() {}
 
   public static void verify(String fieldName, String value) {
     if(value == null || value.equals("")) {
@@ -16,7 +14,7 @@ public class AssertMissingMandatoryValue {
     }
   }
 
-  public static void verify(String fieldName, List<?> value ) {
+  public static void verifyArray(String fieldName, List<?> value ) {
     if(value == null || value.isEmpty()) {
       throw new MissingMandatoryValueException(fieldName);
     }

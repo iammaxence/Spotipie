@@ -9,5 +9,4 @@ public class SpotipieApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpotipieApplication.class, args);
 	}
-
 }

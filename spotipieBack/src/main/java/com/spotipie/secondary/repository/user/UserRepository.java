@@ -70,7 +70,7 @@ public class UserRepository {
       );
 
       
-      if(topSongresponse.getStatusCode().is2xxSuccessful() && topSongresponse.getBody()!= null) {
+      if(topSongresponse.getBody()!= null) {
         log.info(topSongresponse.getBody().toString());
         return topSongResponseMapper.toSongList(topSongresponse.getBody().getItems());
       }

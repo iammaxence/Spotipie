@@ -10,7 +10,6 @@ export class AuthorizationAdapter implements AuthorizationPort {
 	public getAuthorizationCode = async (): Promise<string> => {
 		return (await this.axiosHttp.post('/login', {
 			clientId: '1d41a7bc4b7e491eb7951830ba5d4756',
-			scope: 'user-read-private user-read-email user-top-read',
 			redirectUri: 'http://localhost:1420/login'
 		})).data as string;
 	};
