@@ -1,6 +1,6 @@
 import { renderHook, waitFor } from '@testing-library/react';
 import { describe, expect, vi } from 'vitest';
-import { useHomeHelper } from '../../../../src/primary/pages/home/HomeHelper';
+import { useHomeHelper } from '../../../../src/primary/component/home/HomeHelper';
 import { Song } from '../../../../src/domain/Song';
 import { AxiosHttpFixture } from '../../../secondary/http/AxiosHttpFixture';
 import { Artist } from '../../../../src/domain/Artist';

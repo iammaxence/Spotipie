@@ -9,7 +9,7 @@ import thumbLogo from '../../../assets/thumbs-up.png';
 
 export function NavBar() {
 
-	const { user, isConnected, logout, goToHome } = useNavBarHelper();
+	const { user, isConnected, logout, goToHome, isBurgerMenuOpen, actionBurgerMenu } = useNavBarHelper();
   
 	function displayUserName() {
 		if(user && isConnected()) {
@@ -28,6 +28,16 @@ export function NavBar() {
 				<Link name="Home" logo={homeLogo} navigation={goToHome}/>
 				<Link name="All songs" logo={musicalNotesLogo} navigation={goToHome}/>
 				<Link name="Recommend songs" logo={thumbLogo} navigation={goToHome}/>
+			</div>
+			<div className="burger-menu">
+				<div className={isBurgerMenuOpen ? 'burger open': 'burger close'} onClick={actionBurgerMenu}>
+					<span></span>
+				</div>
+				<div className={isBurgerMenuOpen ? 'burger-menu-open' : 'burger-menu-close'}>
+					<Link name="Home" logo={homeLogo} navigation={goToHome}/>
+					<Link name="All songs" logo={musicalNotesLogo} navigation={goToHome}/>
+					<Link name="Recommend songs" logo={thumbLogo} navigation={goToHome}/>
+				</div>
 			</div>
 			<div>
 				{displayUserName()}

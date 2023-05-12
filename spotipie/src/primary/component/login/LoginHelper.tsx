@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Token } from '../../../domain/Token';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { AuthorizationPort } from '../../../domain/AuthorizationPort';
@@ -20,10 +20,12 @@ export function useLoginHelper({ authorizationAdapter, userAdapter }: LoginHelpe
 	const navigation = useNavigate();
 	const { login, logout, user } = useAuth();
 	const { setItem } = useLocalStorage();
+	
+	const [hasError, setHasError] = useState<boolean>(false);
 
 	useEffect(() => {
 		const { code, state } = getUrlParams();
-		console.log(code);
+	
 		if(!isUserConnected()) {
 			if(code && state) {
 				getAndSetToken(code, state);
@@ -44,9 +46,10 @@ export function useLoginHelper({ authorizationAdapter, userAdapter }: LoginHelpe
 	}
 
 	const connexion = async () => {
-		const redirectUrl = await authorizationAdapter.getAuthorizationCode();
-		console.log(redirectUrl);
-		window.location.replace(redirectUrl);
+		const redirectUrl = await authorizationAdapter.getAuthorizationCode().catch(() => setHasError(true));
+		if(redirectUrl) {
+			window.location.replace(redirectUrl);
+		}
 	};
 
 	function getUrlParams() {
@@ -77,5 +80,6 @@ export function useLoginHelper({ authorizationAdapter, userAdapter }: LoginHelpe
 
 	return {
 		connexion,
+		hasError
 	};
 } 

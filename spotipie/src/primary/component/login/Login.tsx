@@ -11,7 +11,13 @@ interface LoginProps {
 
 export function Login({ authorizationAdapter, userAdapter }: LoginProps) {
 
-	const { connexion } = useLoginHelper({ authorizationAdapter, userAdapter });
+	const { connexion, hasError } = useLoginHelper({ authorizationAdapter, userAdapter });
+
+	function displayError() {
+		if(hasError) {
+			return (<span className="login--error">An error occur: please try later</span>);
+		}
+	}
   
 	return (
 		<div className='login'>
@@ -20,6 +26,7 @@ export function Login({ authorizationAdapter, userAdapter }: LoginProps) {
 				<span className="login--subtitle">Gain insights into your Spotify listening habits</span>
 			</div>
 			<button className="button" onClick={connexion}>Login</button>
+			{displayError()}
 		</div>
 	);
 }

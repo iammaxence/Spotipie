@@ -87,7 +87,7 @@ button {
   margin-right: 5px;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     color: #f6f6f6;
     background-color: #262A3E;
@@ -105,4 +105,4 @@ button {
   button:active {
     background-color: #0f0f0f69;
   }
-}
+} */

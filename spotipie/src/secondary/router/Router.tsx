@@ -3,9 +3,9 @@ import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContextProvider } from '../../primary/context/AuthContext';
 import { AxiosHttp } from '../http/AxiosHttp';
-import { Login } from '../../primary/pages/login/Login';
-import { NavBar } from '../../primary/pages/navbar/NavBar';
-import { Home } from '../../primary/pages/home/Home';
+import { Login } from '../../primary/component/login/Login';
+import { NavBar } from '../../primary/component/navbar/NavBar';
+import { Home } from '../../primary/component/home/Home';
 import { AuthorizationAdapter } from '../authorization/AuthorizationAdapter';
 import { UserAdapter } from '../user/UserAdapter';
 

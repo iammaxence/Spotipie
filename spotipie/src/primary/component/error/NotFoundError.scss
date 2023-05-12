@@ -1,0 +1,18 @@
+.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  font-size: 3rem;
+  color: white;
+  line-height: normal;
+}
+
+.text-error {
+  color: white;
+}
+
+.sub-text-error {
+  font-size: 1rem;
+}

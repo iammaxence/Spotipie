@@ -1,7 +1,7 @@
 import { HttpPort } from '../../domain/HttpPort';
 import { AuthorizationPort } from '../../domain/AuthorizationPort';
 import { Token } from '../../domain/Token';
-import { TokenResponse } from '../../primary/pages/home/response/TokenResponse';
+import { TokenResponse } from '../../primary/component/home/response/TokenResponse';
 
 export class AuthorizationAdapter implements AuthorizationPort {
 

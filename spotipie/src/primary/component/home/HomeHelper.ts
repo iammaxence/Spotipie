@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { Song } from '../../../domain/Song';
-import { Artist } from '../../../domain/Artist';
 import { TimeRangeEnum } from '../../../domain/TimeRange';
 import { Option } from './select/Option';
 import { UserPort } from '../../../domain/UserPort';
@@ -26,6 +25,7 @@ export function useHomeHelper({ userAdapter }: HomeHelperProps) {
 	const [selectedOption, setSelectedOptions] = useState<Option>(selectOptions[0]);
 
 	const [topSongs, setTopSongs] = useState<Song[]>([]);
+	const [hasError, setError] = useState<boolean>(false);
 
 	useEffect(() => {
 		if(!isConnected()) {
@@ -40,13 +40,17 @@ export function useHomeHelper({ userAdapter }: HomeHelperProps) {
 	}, [selectedOption]);
 
 	async function getTopSongs(): Promise<void> {
-		const topSongs = await userAdapter.getTopSongs(user!.getAccessToken(),selectedOption.id, NUMBER_OF_SONGS, OFFSET);
-		setTopSongs(topSongs);
+		const topSongs = await userAdapter.getTopSongs(user!.getAccessToken(),selectedOption.id, NUMBER_OF_SONGS, OFFSET).catch(() => setError(true));
+		if(topSongs) {
+			setTopSongs(topSongs);
+		}
 	}
 
 	return {
+		user,
 		topSongs,
 		selectOptions,
-		setSelectedOptions
+		setSelectedOptions,
+		hasError
 	};
 }

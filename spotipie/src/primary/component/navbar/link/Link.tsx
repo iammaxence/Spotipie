@@ -8,7 +8,6 @@ interface LinkProps{
 }
 
 export function Link({ name, logo, navigation }: LinkProps) {
-  
 	return(
 		<div className="link">
 			<img src={logo} height={20} width={23} alt='home-logo' onClick={navigation}/>

@@ -1,6 +1,6 @@
 .song-card {
   display: inline-flex;
-  gap: 1rem;
+  gap: 0.5rem;
   justify-content: center;
   align-items: center;
 
@@ -10,10 +10,24 @@
     border: solid 1px black;
   }
 
+  &--position {
+    color: white;
+    width: 1.2rem;
+  }
+
   &--text {
     display: flex;
     color: white;
     flex-direction: column;
     justify-content: space-between;
+
+    &--max-length {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      width: 12rem;
+    }
   }
+
+
 }
