@@ -5,8 +5,9 @@ With this app, you can connect your Spotify account and get detailed statistics 
 
 /!\ Building in progress..
 
-![login](https://github.com/iammaxence/Spotipie/assets/32987179/6d966917-7c4d-4e37-8005-39d737145962)
-![home](https://github.com/iammaxence/Spotipie/assets/32987179/70e58ab5-ea68-46f7-84f9-fc18056b78a0)
+![login](https://github.com/iammaxence/Spotipie/assets/32987179/b383fd6a-a812-4e6e-950e-a299ac45aed4)
+![home](https://github.com/iammaxence/Spotipie/assets/32987179/111f320b-0f69-419b-b88e-1372ce2de51b)
+
 
 ## Install
 
