@@ -1,13 +1,19 @@
+@import "/src/primary/style/size";
+
 .link {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
-  cursor: pointer;
-  border: solid 1px #2C2B3E;
   padding: 0.25rem 0.5rem;
-  border-radius: 1rem;
-  background-color: #2C2B3E;
+  gap: 0.5rem;
   color: #9E85FF;
+
+  @media (min-width: $md-screen) {
+    gap: 0.25rem;
+    cursor: pointer;
+    border: solid 1px #2C2B3E;
+    border-radius: 1rem;
+    background-color: #2C2B3E;
+  }
 
   &:hover {
     border-color: #9E85FF;
@@ -19,5 +25,18 @@
   
   >img {
     filter: invert(50%) sepia(88%) saturate(1343%) hue-rotate(217deg) brightness(102%) contrast(101%);
+  }
+}
+
+.disabled{
+  color: #808080;
+
+  &:hover {
+    border-color: transparent;
+    cursor: not-allowed;
+  }
+
+  >img {
+    filter: invert(53%) sepia(4%) saturate(17%) hue-rotate(350deg) brightness(94%) contrast(93%);
   }
 }

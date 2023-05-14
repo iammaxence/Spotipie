@@ -36,10 +36,9 @@ public class AuthorizationRespository {
 
   public Token getToken(AuthorizationCredentials authorizationCredentials) {
     TokenRequest tokenRequest = TokenRequest.builder()
-      .code(authorizationCredentials.getCode())
-      .redirect_uri(authorizationCredentials.getRedirectUri())
-      .grant_type(GRANT_TYPE).build();
-
+        .code(authorizationCredentials.getCode())
+        .redirect_uri(authorizationCredentials.getRedirectUri())
+        .grant_type(GRANT_TYPE).build();
 
     HttpHeaders authHeaders = new HttpHeaders();
     authHeaders.set("Authorization", "Basic " + Base64.getEncoder()

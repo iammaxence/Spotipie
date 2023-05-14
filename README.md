@@ -5,10 +5,38 @@ With this app, you can connect your Spotify account and get detailed statistics 
 
 /!\ Building in progress..
 
+## Install
+
+I need to update the docker-file to make the installation easy.
+For now, you need to :
+
+- Install Cargo to run the app: `curl https://sh.rustup.rs -sSf | sh`
+- Go to spotipie folder: `npm i`
+- Go to spotipieBack: `mvn clean install`
+
+### Frontend
+
+I split my buisness and application logic using hexagonal architecture:
+
+- Domain folder is my buisness logic
+- Primary folder is all the logic inside my application.
+- Secondary folder is the part of the code that communicate with outside.
+
+For each of my component, i tried to separate the view from the logic:
+
+- Helper files contain the logic of a specific component (ex: Home.tsx for the view, HomeHelper.ts for the logic)
+
+### Backend
+
+I use the same structure like the frontend
+
 ## Board
 
-- Add env variables and make it work
-- Add real logout
+- Add env variables
+- Add real logout (maybe complexe because there is no real logout using spotify api)
+- Handle exceptions from backend to frontend
+- Update docker-compose file => It's deprecated
 
 ## About
-Build using Tauri, React, Java and Typescript.
+
+App build using Tauri, React, Typescript and Java
