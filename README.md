@@ -5,6 +5,9 @@ With this app, you can connect your Spotify account and get detailed statistics 
 
 /!\ Building in progress..
 
+![login](https://github.com/iammaxence/Spotipie/assets/32987179/6d966917-7c4d-4e37-8005-39d737145962)
+![home](https://github.com/iammaxence/Spotipie/assets/32987179/70e58ab5-ea68-46f7-84f9-fc18056b78a0)
+
 ## Install
 
 I need to update the docker-file to make the installation easy.
