@@ -24,63 +24,58 @@ import lombok.extern.slf4j.Slf4j;
 public class UserRepository {
   private final RestTemplate restTemplate;
   private static final String PROFILE_URL = "https://api.spotify.com/v1/me";
-  private static final String USER_TOP_TRACKS_URL= "https://api.spotify.com/v1/me/top/tracks";
-  
+  private static final String USER_TOP_TRACKS_URL = "https://api.spotify.com/v1/me/top/tracks";
+
   private final TopSongResponseMapper topSongResponseMapper;
   private final UserResponseMapper userResponseMapper;
-  
-  public UserRepository(RestTemplate restTemplate, UserResponseMapper userResponseMapper, TopSongResponseMapper topSongResponseMapper) {
+
+  public UserRepository(RestTemplate restTemplate, UserResponseMapper userResponseMapper,
+      TopSongResponseMapper topSongResponseMapper) {
     this.restTemplate = restTemplate;
     this.userResponseMapper = userResponseMapper;
-    this.topSongResponseMapper= topSongResponseMapper;
+    this.topSongResponseMapper = topSongResponseMapper;
   }
 
-  
   public User getUserProfile(String token) {
     try {
       HttpHeaders headers = new HttpHeaders();
       headers.set("Authorization", "Bearer " + token);
 
       ResponseEntity<UserResponse> response = restTemplate.exchange(
-        PROFILE_URL,
-        HttpMethod.GET,
-        new HttpEntity<>(headers),
-        UserResponse.class
-      );
+          PROFILE_URL,
+          HttpMethod.GET,
+          new HttpEntity<>(headers),
+          UserResponse.class);
 
       return userResponseMapper.toUser(response.getBody());
-    } catch(HttpClientErrorException httpClientErrorException) {
+    } catch (HttpClientErrorException httpClientErrorException) {
       throw new HttpExceptionHandler(httpClientErrorException.getStatusCode(), httpClientErrorException.getMessage());
     }
   }
 
-
   public List<Song> getTopSongs(String authHeader, String timeRange, int numberOfItems, int offset) {
-    log.info("getTopSongs(): timeRange="+timeRange + "numberOfItems="+ numberOfItems + " offset=" + offset);
-    log.info("authHeader : "+ authHeader);
+    log.info("getTopSongs(): timeRange=" + timeRange + " numberOfItems=" + numberOfItems + " offset=" + offset);
+    log.info("authHeader : " + authHeader);
     try {
       HttpHeaders headers = new HttpHeaders();
       headers.set("Authorization", authHeader);
 
       ResponseEntity<TopSongResponse> topSongresponse = restTemplate.exchange(
-        USER_TOP_TRACKS_URL+buildTopSongQueryParams(timeRange, numberOfItems, offset),
-        HttpMethod.GET,
-        new HttpEntity<>(headers),
-        TopSongResponse.class
-      );
+          USER_TOP_TRACKS_URL + buildTopSongQueryParams(timeRange, numberOfItems, offset),
+          HttpMethod.GET,
+          new HttpEntity<>(headers),
+          TopSongResponse.class);
 
-      
-      if(topSongresponse.getBody()!= null) {
-        log.info(topSongresponse.getBody().toString());
+      if (topSongresponse.getBody() != null) {
         return topSongResponseMapper.toSongList(topSongresponse.getBody().getItems());
       }
       return List.of();
-    } catch(HttpClientErrorException httpClientErrorException) {
+    } catch (HttpClientErrorException httpClientErrorException) {
       throw new HttpExceptionHandler(httpClientErrorException.getStatusCode(), httpClientErrorException.getMessage());
     }
   }
 
   private String buildTopSongQueryParams(String timeRange, int numberOfItems, int offset) {
-    return "?time_range="+timeRange+"&limit="+numberOfItems+"&offset="+offset;
+    return "?time_range=" + timeRange + "&limit=" + numberOfItems + "&offset=" + offset;
   }
 }

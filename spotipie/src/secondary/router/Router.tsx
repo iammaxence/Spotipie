@@ -8,6 +8,9 @@ import { NavBar } from '../../primary/component/navbar/NavBar';
 import { Home } from '../../primary/component/home/Home';
 import { AuthorizationAdapter } from '../authorization/AuthorizationAdapter';
 import { UserAdapter } from '../user/UserAdapter';
+import { Footer } from '../../primary/component/footer/Footer';
+import { TermsAndConditions } from '../../primary/component/footer/termsAndConditions/TermsAndConditions';
+import { PrivacyPolicy } from '../../primary/component/footer/privacyPolicy/PrivacyPolicy';
 
 export function Router() {
 	const axiosHttp = new AxiosHttp(axios.create({ baseURL: 'http://localhost:8080' }));
@@ -20,11 +23,32 @@ export function Router() {
 				<Route path="/" element={<Login authorizationAdapter={authorizationAdapter} userAdapter={userAdapter} />} />
 				<Route path="/login" element={<Login authorizationAdapter={authorizationAdapter} userAdapter={userAdapter} />} />
 				<Route
+					path="/termsAndConditions"
+					element={
+						<Fragment>
+							<NavBar />
+							<TermsAndConditions />
+							<Footer />
+						</Fragment>
+					} 
+				/>
+				<Route
+					path="/privacyPolicy"
+					element={
+						<Fragment>
+							<NavBar />
+							<PrivacyPolicy />
+							<Footer />
+						</Fragment>
+					} 
+				/>
+				<Route
 					path="/home"
 					element={
 						<Fragment>
 							<NavBar />
 							<Home userAdapter={userAdapter}/>
+							<Footer />
 						</Fragment>
 					}
 				/>

@@ -23,25 +23,28 @@ export function NavBar() {
 	}
   
 	return(
-		<div className="navigation-bar">
-			<div className='links'>
-				<Link name="Home" logo={homeLogo} navigation={goToHome}/>
-				<Link name="All songs" logo={musicalNotesLogo} navigation={goToHome} disabled={true}/>
-				<Link name="Recommend songs" logo={thumbLogo} navigation={goToHome}  disabled={true}/>
-			</div>
-			<div className="burger-menu">
-				<div className={isBurgerMenuOpen ? 'burger open': 'burger close'} onClick={actionBurgerMenu}>
-					<span></span>
-				</div>
-				<div className={isBurgerMenuOpen ? 'burger-menu-open' : 'burger-menu-close'}>
+		<>
+			<div className="navigation-bar">
+				<div className='links'>
 					<Link name="Home" logo={homeLogo} navigation={goToHome}/>
 					<Link name="All songs" logo={musicalNotesLogo} navigation={goToHome} disabled={true}/>
-					<Link name="Recommend songs" logo={thumbLogo} navigation={goToHome} disabled={true}/>
+					<Link name="Recommend songs" logo={thumbLogo} navigation={goToHome}  disabled={true}/>
+				</div>
+				<div className="burger-menu">
+					<div className={isBurgerMenuOpen ? 'burger open': 'burger close'} onClick={actionBurgerMenu}>
+						<span></span>
+					</div>
+				</div>
+				<div>
+					{displayUserName()}
 				</div>
 			</div>
-			<div>
-				{displayUserName()}
+			<div className={isBurgerMenuOpen ? 'burger-menu-open' : 'burger-menu-close'}>
+				<Link name="Home" logo={homeLogo} navigation={goToHome}/>
+				<Link name="All songs" logo={musicalNotesLogo} navigation={goToHome} disabled={true}/>
+				<Link name="Recommend songs" logo={thumbLogo} navigation={goToHome} disabled={true}/>
 			</div>
-		</div>
+		</>
+		
 	);
 } 

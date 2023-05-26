@@ -9,10 +9,12 @@ export function useNavBarHelper() {
 	const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState<boolean>(false);
 
 	function goToHome(): void {
+		setIsBurgerMenuOpen((prevValue) => !prevValue);
 		navigate('/home');
 	}
 
 	function actionBurgerMenu(): void {
+		console.log('ACTION BURGER');
 		setIsBurgerMenuOpen((prevValue) => !prevValue);
 	}
 

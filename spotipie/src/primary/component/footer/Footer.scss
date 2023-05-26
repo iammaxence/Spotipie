@@ -1,0 +1,25 @@
+@import "/src/primary/style/size";
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  text-decoration: underline;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: #1E1F25;
+  color: white;
+  
+  @media (min-width: $md-screen) {
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  &--item {
+    cursor: pointer;
+
+    &:hover {
+      opacity: 75%;
+    }
+  }
+}

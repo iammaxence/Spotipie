@@ -8,7 +8,6 @@ With this app, you can connect your Spotify account and get detailed statistics 
 ![login](https://github.com/iammaxence/Spotipie/assets/32987179/b383fd6a-a812-4e6e-950e-a299ac45aed4)
 ![home](https://github.com/iammaxence/Spotipie/assets/32987179/111f320b-0f69-419b-b88e-1372ce2de51b)
 
-
 ## Install
 
 I need to update the docker-file to make the installation easy.
@@ -40,6 +39,8 @@ I use the same structure like the frontend
 - Add real logout (maybe complexe because there is no real logout using spotify api)
 - Handle exceptions from backend to frontend
 - Update docker-compose file => It's deprecated
+- Update Terms and Conditions of Spotipie website
+- Click outside burger menu: Do not work when click outside navbar
 
 ## About
 
