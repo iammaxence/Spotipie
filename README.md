@@ -8,6 +8,18 @@ With this app, you can connect your Spotify account and get detailed statistics 
 ![login](https://github.com/iammaxence/Spotipie/assets/32987179/b383fd6a-a812-4e6e-950e-a299ac45aed4)
 ![home](https://github.com/iammaxence/Spotipie/assets/32987179/111f320b-0f69-419b-b88e-1372ce2de51b)
 
+## Easy run app
+
+### Prerequisite
+
+Install docker dependencies:  
+https://docs.docker.com/
+
+### Running command
+
+In the root of the project, run the following command:  
+`docker-compose up --build`
+
 ## Install
 
 I need to update the docker-file to make the installation easy.
