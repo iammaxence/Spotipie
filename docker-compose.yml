@@ -1,18 +1,16 @@
-version: "3.7"
+version: "3"
 services:
-    angular-app:
-        depends_on: 
-            - backend
-        build: spotipie
-        ports:
-            - 4200:4200
-        volumes:
-            - '.:/app'
-            - '/app/node_modules'
-        restart: always
-    backend:
-        build: spotipieBack
-        ports:
-            - 8080:8080
-        volumes:
-            - '/spotipie/data'
+  front:
+    build:
+      context: ./spotipie
+      dockerfile: Dockerfile
+    ports:
+      - 1420:1420
+    depends_on:
+      - backend
+  backend:
+    build:
+      context: ./spotipieBack
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
