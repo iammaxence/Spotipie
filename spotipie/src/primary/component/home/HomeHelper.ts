@@ -11,7 +11,7 @@ interface HomeHelperProps {
 }
 
 export function useHomeHelper({ userAdapter }: HomeHelperProps) {
-	const { user, isConnected } = useAuth();
+	const { user, isConnected, logout } = useAuth();
 	const navigation = useNavigate();
 
 	const NUMBER_OF_SONGS = 10;
@@ -40,7 +40,15 @@ export function useHomeHelper({ userAdapter }: HomeHelperProps) {
 	}, [selectedOption]);
 
 	async function getTopSongs(): Promise<void> {
-		const topSongs = await userAdapter.getTopSongs(user!.getAccessToken(),selectedOption.id, NUMBER_OF_SONGS, OFFSET).catch(() => setError(true));
+		const topSongs = await userAdapter.getTopSongs(user!.getAccessToken(),selectedOption.id, NUMBER_OF_SONGS, OFFSET).catch((error) =>{
+			console.log(error);
+			
+			if(error.response && error.response.status === 401){
+				logout();
+			}
+			console.log('test');
+			setError(true);
+		});
 		if(topSongs) {
 			setTopSongs(topSongs);
 		}

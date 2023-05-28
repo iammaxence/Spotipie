@@ -50,7 +50,6 @@ I use the same structure like the frontend
 - Add env variables
 - Add real logout (maybe complexe because there is no real logout using spotify api)
 - Handle exceptions from backend to frontend
-- Update docker-compose file => It's deprecated
 - Update Terms and Conditions of Spotipie website
 - Click outside burger menu: Do not work when click outside navbar
 

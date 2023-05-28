@@ -1,12 +1,13 @@
 .error {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  padding-top: 10%;
   align-items: center;
   gap: 2rem;
   font-size: 3rem;
   color: white;
   line-height: normal;
+  height: 100%;
 }
 
 .text-error {
