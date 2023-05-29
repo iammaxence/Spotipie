@@ -19,19 +19,22 @@ const axiosHttp = AxiosHttpFixture({
 const authorizationAdapter = new AuthorizationAdapter(axiosHttp);
 
 describe('AuthorizationAdapter', () => {
-	it('Should call login endpoint to get authorization code', () => {
+	it('Should call login endpoint to get authorization code', async () => {
 		vi.spyOn(axiosHttp, 'post');
-		authorizationAdapter.getAuthorizationCode();
+
+		await authorizationAdapter.getAuthorizationCode();
+
 		expect(axiosHttp.post).toHaveBeenCalledWith('/login', {
 			clientId: '1d41a7bc4b7e491eb7951830ba5d4756',
 			redirectUri: 'http://localhost:1420/login',
-			scope: 'user-read-private user-read-email user-top-read',
 		});
 	});
 
-	it('Should call token endpoint to get token', () => {
+	it('Should call token endpoint to get token', async () => {
 		vi.spyOn(axiosHttp, 'post');
-		authorizationAdapter.getToken('fake_code', 'fake_state');
+
+		await authorizationAdapter.getToken('fake_code', 'fake_state');
+
 		expect(axiosHttp.post).toHaveBeenCalledWith('/token', {
 			clientId: '1d41a7bc4b7e491eb7951830ba5d4756',
 			code: 'fake_code',

@@ -52,6 +52,7 @@ I use the same structure like the frontend
 - Handle exceptions from backend to frontend
 - Update Terms and Conditions of Spotipie website
 - Click outside burger menu: Do not work when click outside navbar
+- Add exceptions on domain object when a field doesnt exists
 
 ## About
 

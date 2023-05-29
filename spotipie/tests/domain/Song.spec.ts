@@ -1,5 +1,6 @@
 import { describe, expect } from 'vitest';
 import { Song } from '../../src/domain/Song';
+import { Artist } from '../../src/domain/Artist';
 
 describe('Song', () => {
 	// it('Should throw exception if artistName of Song is missing', () => {
@@ -10,27 +11,31 @@ describe('Song', () => {
 	// 	expect(() => Song.of('artistName', '', 10)).toThrow('Song attribut is missing');
 	// });
 
-	// it('Should get artistName of a Song', () => {
-	// 	const artistName= 'The Arstist';
-	// 	const title= 'the song title';
-	// 	const numberOfListening = 10;
+	it('Should get artists of a Song', () => {
+		const artists = [Artist.of('artistName')];
+		const song = Song.of(artists, 'titleName', 'albumName', 'image');
 
-	// 	expect(Song.of(artistName, title, numberOfListening).getArtistName()).toEqual(artistName);
-	// });
+		expect(song.getArtists()).toEqual(artists);
+	});
 
-	// it('Should get title of a Song', () => {
-	// 	const artistName= 'The Arstist';
-	// 	const title= 'the song title';
-	// 	const numberOfListening = 10;
+	it('Should get title of a Song', () => {
+		const title= 'titleName';
+		const song = Song.of([Artist.of('artistName')], title, 'albumName', 'image');
 
-	// 	expect(Song.of(artistName, title, numberOfListening).getTitle()).toEqual(title);
-	// });
+		expect(song.getTitle()).toEqual(title);
+	});
 
-	// it('Should get number of listenning of a Song', () => {
-	// 	const artistName= 'The Arstist';
-	// 	const title= 'the song title';
-	// 	const numberOfListening = 10;
+	it('Should get album name', () => {
+		const albumName= 'albumName';
+		const song = Song.of([Artist.of('artistName')], 'titleName', albumName, 'image');
 
-	// 	expect(Song.of(artistName, title, numberOfListening).getNumberOfListenning()).toEqual(numberOfListening);
-	// });
+		expect(song.getAlbumName()).toEqual(albumName);
+	});
+
+	it('Should get image', () => {
+		const image_url = 'image';
+		const song = Song.of([Artist.of('artistName')], 'titleName', 'albumName', image_url);
+
+		expect(song.getImage()).toEqual(image_url);
+	});
 });
