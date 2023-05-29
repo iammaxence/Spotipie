@@ -3,8 +3,10 @@
 .privacy {
   display: flex;
   flex-direction: column;
+  gap: 3rem;
   padding: 2rem 1.5rem;
   color: white;
+  min-height: 100vh;
 
   &--title {
     line-height: 2rem;
@@ -22,6 +24,5 @@
   
   @media (min-width: $xl-screen) {
     padding: 2rem 8rem;
-    height: 100%;
   }
 }
