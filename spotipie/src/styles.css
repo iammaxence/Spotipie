@@ -11,6 +11,23 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  /* Toast */
+  
+  --toast-success-hue: 150;
+  --toast-failure-hue: 20;
+  --toast-warning-hue: 205;
+  --toast-padding: 1.5em;
+  --toast-margin: 0.5em;
+  --toast-bg-color-fallback: hsl(var(--secondary-hue) 15% 100%);
+  --toast-text-color-fallback: hsl(var(--secondary-hue) 10% 25%);
+  --toast-opacity: 0.99;
+  --toast-content-gap: 1em;
+
+  --toast-speed: 250ms;
+  --toast-list-scrollbar-width: 0.35em;
+  --toast-list-width: 400px;
+  --toast-list-padding: 1em;
 }
 
 .container {

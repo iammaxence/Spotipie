@@ -3,14 +3,6 @@ import { Song } from '../../src/domain/Song';
 import { Artist } from '../../src/domain/Artist';
 
 describe('Song', () => {
-	// it('Should throw exception if artistName of Song is missing', () => {
-	// 	expect(() => Song.of('', 'title', 10)).toThrow('Song attribut is missing');
-	// });
-
-	// it('Should throw exception if title of Song is missing', () => {
-	// 	expect(() => Song.of('artistName', '', 10)).toThrow('Song attribut is missing');
-	// });
-
 	it('Should get artists of a Song', () => {
 		const artists = [Artist.of('artistName')];
 		const song = Song.of(artists, 'titleName', 'albumName', 'image');

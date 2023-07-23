@@ -1,0 +1,67 @@
+.toast {
+  background-color: white;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  padding: 1rem;
+  border-radius: 0.5em;
+  position: relative;
+  color: var(--toast-text-color-fallback);
+  opacity: var(--toast-opacity);
+}
+
+.toast:hover {
+  opacity: 1;
+  box-shadow: hsl(var(--secondary-hue) 10% 10% / 30%) 0px 1px 3px 0px,
+    hsl(var(--secondary-hue) 10% 10% / 15%) 0px 1px 2px 0px;
+}
+
+.toast + .toast {
+  margin-top: var(--toast-margin);
+}
+
+.toast-message {
+  display: flex;
+  gap: var(--toast-content-gap);
+  align-items: center;
+}
+
+.toast-close-btn {
+  position: absolute;
+  top: 0.3em;
+  right: 0.3em;
+  line-height: 1;
+  height: 1em;
+  width: 1em;
+  background: #acaff1;
+  border: solid 1px #acaff1;
+  padding: 0.3rem;
+  cursor: pointer;
+  color: black;
+}
+
+.toast--success {
+  color: hsl(var(--toast-success-hue) 97% 3%);
+  background-color: hsl(var(--toast-success-hue) 98% 99%);
+}
+
+.toast--success .icon--thumb {
+  color: hsl(var(--toast-success-hue) 90% 40%);
+}
+
+.toast--failure {
+  // color: hsl(var(--toast-failure-hue) 97% 3%);
+  // background-color: hsl(var(--toast-failure-hue) 98% 99%);
+  filter: invert(25%) sepia(83%) saturate(3221%) hue-rotate(337deg) brightness(95%) contrast(77%);
+}
+
+.toast--failure .icon--thumb {
+  color: hsl(var(--toast-failure-hue) 90% 40%);
+}
+
+.toast--warning {
+  color: hsl(var(--toast-warning-hue) 97% 3%);
+  background-color: hsl(var(--toast-warning-hue) 98% 99%);
+}
+
+.toast--warning .icon--thumb {
+  color: hsl(var(--toast-warning-hue) 90% 40%);
+}

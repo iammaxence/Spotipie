@@ -1,10 +1,12 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Token } from '../../../domain/Token';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { AuthorizationPort } from '../../../domain/AuthorizationPort';
 import { UserPort } from '../../../domain/UserPort';
+import { ToastType } from '../toast/Toast';
+import { ToastContext } from '../../context/ToastContext';
 
 interface LoginHelperProps {
 	authorizationAdapter: AuthorizationPort
@@ -20,6 +22,7 @@ export function useLoginHelper({ authorizationAdapter, userAdapter }: LoginHelpe
 	const navigation = useNavigate();
 	const { login, logout, user } = useAuth();
 	const { setItem } = useLocalStorage();
+	const { showToast } = useContext(ToastContext);
 	
 	const [hasError, setHasError] = useState<boolean>(false);
 
@@ -46,9 +49,13 @@ export function useLoginHelper({ authorizationAdapter, userAdapter }: LoginHelpe
 	}
 
 	const connexion = async () => {
-		const redirectUrl = await authorizationAdapter.getAuthorizationCode().catch(() => setHasError(true));
-		if(redirectUrl) {
+		try {
+			const redirectUrl = await authorizationAdapter.getAuthorizationCode();
 			window.location.replace(redirectUrl);
+		} catch(error: unknown) {
+			const message = (error as Error).message;
+			showToast(message, ToastType.error);
+			setHasError(true);
 		}
 	};
 
@@ -62,9 +69,14 @@ export function useLoginHelper({ authorizationAdapter, userAdapter }: LoginHelpe
 	}
 
 	async function getAndSetToken(code: string, state: string): Promise<void> {
-		const token: Token = await authorizationAdapter.getToken(code, state); 
-		await setToken(token);
-		tokenExpiration();
+		try {
+			const token: Token = await authorizationAdapter.getToken(code, state);
+			await setToken(token);
+			tokenExpiration();
+		} catch (error: unknown) {
+			const message = (error as Error).message;
+			showToast(message, ToastType.error);	
+		}
 	}
 
 	function tokenExpiration(): void {
