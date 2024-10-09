@@ -13,7 +13,6 @@ export class HttpHelper {
   }
 
   public static async get(url, params): Promise<Response> {
-    console.log(params);
     return await fetch(url+this.QUERY_PARAMS_PREFIX+params, {
       method: 'GET',
       headers: {

@@ -1,30 +1,34 @@
 <script setup lang="ts">
-import type { AuthorizationAdapter } from '@/adapter/AuthorizationAdapter'
-import { inject, onBeforeMount } from 'vue'
+import { onBeforeMount } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/userAuth'
+import type { UserPort } from '@/interfaces/UserPort'
+import { UserAdapter } from '@/adapter/UserAdapter'
+import { AuthorizationAdapter } from '@/adapter/AuthorizationAdapter'
 
-const authorizationPort: AuthorizationAdapter = inject('authorizationPort')!
+const userAuthStore = useUserStore();
 
-const userStore = useUserStore();
+const authorizationPort: authorizationPort = new AuthorizationAdapter(userAuthStore);
+const userPort: UserPort = new UserAdapter(userAuthStore);
+
 const router = useRouter();
 
 onBeforeMount(async () => {
-  if(userStore.getAccessToken()) {
+  if(userAuthStore.getAccessToken()) {
     await setUserAndRedirectToHomePage()
   } else {
     const route = useRoute()
     const { code, state } = route.query
 
     if (code && state) {
-      await userStore.setToken(code, state)
+      await authorizationPort.getToken(code, state)
       await setUserAndRedirectToHomePage()
     }
   }
 })
 
 const setUserAndRedirectToHomePage = async () => {
-  await userStore.setUser();
+  await userPort.getUser(userAuthStore.getAccessToken())
   await router.push({ path: '/'})
 }
 

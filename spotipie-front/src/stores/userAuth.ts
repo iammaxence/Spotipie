@@ -1,10 +1,6 @@
 import { ref, type Ref } from 'vue'
 import { defineStore } from 'pinia'
 import type { User } from '@/interfaces/User'
-import { UserAdapter } from '@/adapter/UserAdapter'
-import type { UserPort } from '@/interfaces/UserPort'
-import type { AuthorizationPort } from '@/interfaces/AuthorizationPort'
-import { AuthorizationAdapter } from '@/adapter/AuthorizationAdapter'
 
 export const useUserStore = defineStore('user', () => {
   const TOKEN_EXPIRATION_IN_SECS = 3000
@@ -12,18 +8,15 @@ export const useUserStore = defineStore('user', () => {
 
   const user: Ref<User | null> = ref(null)
 
-  const userPort: UserPort = new UserAdapter()
-  const authorizationPort: AuthorizationPort = new AuthorizationAdapter()
-
   const getUser = () => {
     return user.value
   }
 
-  const setUser = async () => {
+  const setUser = async (newUser: User) => {
     if(getAccessToken()) {
-      user.value = await userPort.getUser(getAccessToken());
+      user.value = newUser
     } else {
-      throw Error('Token not found')
+      throw Error('Access token is not found')
     }
   }
 
@@ -31,9 +24,8 @@ export const useUserStore = defineStore('user', () => {
     return localStorage.getItem(ACCESS_TOKEN_LOCAL_STORAGE)
   }
 
-  const setToken = async (code: string, state: string) => {
-    const token = await authorizationPort.getToken(code, state);
-    localStorage.setItem(ACCESS_TOKEN_LOCAL_STORAGE, token.accessToken);
+  const setAccessToken = async (accessToken: string) => {
+    localStorage.setItem(ACCESS_TOKEN_LOCAL_STORAGE, accessToken);
     setTimeout(() => clearAll(), TOKEN_EXPIRATION_IN_SECS*1000);
   }
 
@@ -41,5 +33,5 @@ export const useUserStore = defineStore('user', () => {
     user.value = null;
   }
 
-  return { getUser, setUser, getAccessToken, setToken }
+  return { getUser, setUser, getAccessToken, setAccessToken }
 })

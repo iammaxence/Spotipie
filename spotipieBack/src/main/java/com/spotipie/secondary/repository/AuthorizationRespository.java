@@ -21,7 +21,7 @@ import com.spotipie.primary.response.TokenResponse;
 public class AuthorizationRespository {
 
   private static final String AUTH_URL = "https://accounts.spotify.com/api/token";
-  private static final String CLIENT_SECRET = "3730766300774b2e9a51368143318adb"; // todo : remove when push
+  private static final String CLIENT_SECRET = ""; // todo : remove when push
   private static final String GRANT_TYPE = "authorization_code";
 
   private final RestTemplate restTemplate;

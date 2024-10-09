@@ -4,8 +4,6 @@ import { useUserStore } from '@/stores/userAuth'
 
 // Mock interfaces
 import type { User } from '@/interfaces/User'
-import type { UserPort } from '@/interfaces/UserPort'
-import type { AuthorizationPort } from '@/interfaces/AuthorizationPort'
 
 // Mocking localStorage
 const localStorageMock = (() => {
@@ -40,22 +38,9 @@ describe('useUserStore', () => {
     email: 'maxence@example.com'
   };
 
-
-  const userPortMock: UserPort = {
-    getUser: vi.fn().mockResolvedValue(mockUser)
-  };
-
-  const authorizationPortMock: AuthorizationPort = {
-    getToken: vi.fn().mockResolvedValue({ accessToken: 'mockAccessToken' })
-  };
-
   beforeEach(() => {
     setActivePinia(createPinia());
     userStore = useUserStore();
-
-    //vi.spyOn(messages, 'getLatest')
-    //userStore.userPort = vi.fn().mockResolvedValue(userPortMock);
-    //userStore.authorizationPort.getToken = vi.fn().mockResolvedValue({ accessToken: 'mockAccessToken' })
 
     window.localStorage.clear();
   });
@@ -63,28 +48,27 @@ describe('useUserStore', () => {
   it('should set user when access token exists', async () => {
     window.localStorage.setItem('accessToken', 'mockAccessToken');
 
-    await userStore.setUser();
+    await userStore.setUser(mockUser);
 
     expect(userStore.getUser()).toEqual(mockUser);
-    expect(userPortMock.getUser).toHaveBeenCalledWith('mockAccessToken');
   });
 
   it('should throw error when token is not found', async () => {
-    await expect(userStore.setUser()).rejects.toThrow('Token not found');
+    await expect(userStore.setUser()).rejects.toThrow('Access token is not found');
   });
 
-  it('should store access token and set user', async () => {
-    await userStore.setToken('mockCode', 'mockState');
+  it('should store access token', async () => {
+    await userStore.setAccessToken('mockAccessToken');
 
     expect(window.localStorage.getItem('accessToken')).toBe('mockAccessToken');
-    expect(authorizationPortMock.getToken).toHaveBeenCalledWith('mockCode', 'mockState');
   });
 
   it('should clear user after token expiration', async () => {
     vi.useFakeTimers();
-    await userStore.setToken('mockCode', 'mockState');
+    await userStore.setAccessToken('mockAccessToken');
+    await userStore.setUser(mockUser);
 
-    expect(userStore.getUser()).toBeNull();
+    expect(userStore.getUser()).toEqual(mockUser);
 
     vi.advanceTimersByTime(3000 * 1000);
 
