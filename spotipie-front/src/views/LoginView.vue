@@ -1,29 +1,38 @@
 <script setup lang="ts">
 import type { AuthorizationAdapter } from '@/adapter/AuthorizationAdapter'
 import { inject, onBeforeMount } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/userAuth'
 
 const authorizationPort: AuthorizationAdapter = inject('authorizationPort')!
 
-onBeforeMount(() => {
-  const route = useRoute()
-  const { code, status } = route.query
+const userStore = useUserStore();
+const router = useRouter();
 
-  if (code && status) {
-    console.log('Code : ' + code)
-    console.log('Status : ' + status)
+onBeforeMount(async () => {
+  if(userStore.getAccessToken()) {
+    await setUserAndRedirectToHomePage()
+  } else {
+    const route = useRoute()
+    const { code, state } = route.query
+
+    if (code && state) {
+      await userStore.setToken(code, state)
+      await setUserAndRedirectToHomePage()
+    }
   }
 })
 
+const setUserAndRedirectToHomePage = async () => {
+  await userStore.setUser();
+  await router.push({ path: '/'})
+}
+
 const connexion = async () => {
-  console.log('Connexion')
   const redirectUrl = await authorizationPort.getAuthorizationCode()
   window.location.replace(redirectUrl)
 }
 
-/* watch(,() => {
-
-}) */
 </script>
 <template>
   <div class="container login">
