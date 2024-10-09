@@ -1,6 +1,7 @@
 export interface User {
   email: string
-  name: string
+  pseudo: string
   country: string
   accessToken: string
+  images: [{url: string}]
 }

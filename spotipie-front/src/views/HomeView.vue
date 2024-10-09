@@ -4,7 +4,9 @@ import RadioToggle from '@/components/radio-toggle/RadioToggle.vue'
 import SongCard from '@/components/card/SongCard.vue'
 import { ref, type Ref } from 'vue'
 import type { Song } from '@/interfaces/Song'
+import { useUserStore } from '@/stores/userAuth'
 
+const userStore = useUserStore();
 const name = 'Maxence'
 const selectedFilter: Ref<Filter> = ref(Filter.ALL_TIME)
 
@@ -32,10 +34,10 @@ const songs: Song[] = [
     <!-- Heading -->
     <div class="home--head">
       <div class="home--head-text-wrapper">
-        <span>Bonjour {{ name }},</span>
+        <span>Bonjour {{ userStore.getUser()!.pseudo }},</span>
         <span class="home--head-text-wrapper--secondary"> Vos statistiques </span>
       </div>
-      <img class="home--head-img" src="/src/assets/user-logo.png" alt="user-profil-img" />
+      <img class="home--head-img" :src="userStore.getUser()!.images[0].url" alt="user-profil-img" />
     </div>
     <!-- Radio buttons -->
     <RadioToggle v-model="selectedFilter" />
@@ -70,6 +72,7 @@ const songs: Song[] = [
 
     &-img {
       width: 3.5rem;
+      border-radius: 50%;
     }
   }
 
