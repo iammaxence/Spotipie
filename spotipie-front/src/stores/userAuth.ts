@@ -31,6 +31,7 @@ export const useUserStore = defineStore('user', () => {
 
   const clearAll = () => {
     user.value = null;
+    localStorage.clear()
   }
 
   return { getUser, setUser, getAccessToken, setAccessToken }
