@@ -1,7 +1,7 @@
 export interface Song {
-  artists: string[]
+  artists: string[{name: string}]
   title: string
   albumName: string
-  urlImage: string
+  urlImages: string[{url: string}]
   position: number
 }

@@ -8,7 +8,7 @@ let wrapper: VueWrapper<any>
 const init = () => {
   wrapper = mount(SongCard, {
     props: {
-      artists: ['Guizmo', 'Nekfeu'],
+      artists: [{ name: 'Guizmo' }, { name: 'Nekfeu' }],
       title: 'Clash',
       albumName: 'La banquize',
       urlImage: ''

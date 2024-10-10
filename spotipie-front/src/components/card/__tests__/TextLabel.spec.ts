@@ -19,7 +19,6 @@ describe('TextLabel', () => {
     init()
 
     // Then
-    expect(wrapper.get('#label').text()).toBe('artists:')
-    expect(wrapper.get('#text').text()).toBe('Guizmo')
+    expect(wrapper.get('#text').text()).toBe('artists: Guizmo')
   })
 })

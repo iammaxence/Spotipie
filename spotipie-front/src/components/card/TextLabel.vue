@@ -7,11 +7,24 @@ const props = defineProps({
 
 <template>
   <div class="textlabel">
-    <span id="label">{{ props.label }}: </span>
-    <span id="text">{{ props.text }}</span>
+    <span id="text">{{ props.label }}: {{ props.text }}</span>
   </div>
 </template>
 <style scoped lang="scss">
 .textlabel {
+  /**white-space: nowrap;
+  max-width: 70%;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;**/
+
+  display: grid;
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1rem;
+    font-weight: normal;
+  }
 }
 </style>

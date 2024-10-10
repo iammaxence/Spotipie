@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c62e1c3-dace-4c5e-bd1a-6b2b6abcc9fa" name="Changes" comment="" />
+    <list default="true" id="8c62e1c3-dace-4c5e-bd1a-6b2b6abcc9fa" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spotipie-front/src/adapter/HttpHelper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/spotipie-front/src/adapter/HttpHelper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spotipie-front/src/adapter/UserAdapter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/spotipie-front/src/adapter/UserAdapter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spotipie-front/src/components/card/SongCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/spotipie-front/src/components/card/SongCard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spotipie-front/src/components/card/TextLabel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/spotipie-front/src/components/card/TextLabel.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spotipie-front/src/components/card/__tests__/SongCard.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/spotipie-front/src/components/card/__tests__/SongCard.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spotipie-front/src/components/card/__tests__/TextLabel.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/spotipie-front/src/components/card/__tests__/TextLabel.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spotipie-front/src/interfaces/Filter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/spotipie-front/src/interfaces/Filter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spotipie-front/src/interfaces/Song.ts" beforeDir="false" afterPath="$PROJECT_DIR$/spotipie-front/src/interfaces/Song.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spotipie-front/src/interfaces/UserPort.ts" beforeDir="false" afterPath="$PROJECT_DIR$/spotipie-front/src/interfaces/UserPort.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spotipie-front/src/views/HomeView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/spotipie-front/src/views/HomeView.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,9 +26,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2n9MHGVRH12H1Pf6pnqWdlCAbeS" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -22,7 +38,12 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/maxence/perso/Spotipie/spotipieBack",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/maxence/perso/Spotipie",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -44,7 +65,11 @@
       <option name="presentableId" value="Default" />
       <updated>1728380751148</updated>
       <workItem from="1728380752812" duration="59000" />
+      <workItem from="1728558983477" duration="715000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

@@ -1,7 +1,7 @@
 export class HttpHelper {
   private static QUERY_PARAMS_PREFIX = '?';
 
-  public static async post(url, body): Promise<Response> {
+  public static async post(url: string, body: string): Promise<Response> {
     return await fetch(url, {
       method: 'POST',
       headers: {
@@ -12,13 +12,14 @@ export class HttpHelper {
     })
   }
 
-  public static async get(url, params): Promise<Response> {
+  public static async get(url: string, params: string, headers: string[{string: string}] = []): Promise<Response> {
     return await fetch(url+this.QUERY_PARAMS_PREFIX+params, {
       method: 'GET',
-      headers: {
+      headers: Object.assign({
         'Accept': 'application/json, text/plain',
-        'Content-Type': 'application/json;charset=UTF-8'
-      },
+        'Content-Type': 'application/json;charset=UTF-8',
+        },
+        ...headers)
     })
   }
 }

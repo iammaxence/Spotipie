@@ -47,6 +47,7 @@ I use the same structure like the frontend
 
 ## Board
 
+- Fix "token expires when call user"
 - Add env variables
 - Add real logout (maybe complexe because there is no real logout using spotify api)
 - Handle exceptions from backend to frontend

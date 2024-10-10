@@ -3,7 +3,7 @@ import TextLabel from '@/components/card/TextLabel.vue'
 const ARTISTS_NAME_DELIMITER = ', '
 const props = defineProps({
   artists: {
-    type: Array<string>,
+    type: Array<{name: string}>,
     default: []
   },
   title: String,
@@ -14,9 +14,9 @@ const props = defineProps({
 
 <template>
   <div class="card">
-    <img class="card--img" src="/src/assets/default-song-img.png" alt="song-card" />
+    <img class="card--img" :src="urlImage" alt="song-card" />
     <div class="card--text-wrapper">
-      <TextLabel label="Artiste(s)" :text="props.artists.join(ARTISTS_NAME_DELIMITER)" />
+      <TextLabel label="Artiste(s)" :text="props.artists.map(artist => artist.name).join(ARTISTS_NAME_DELIMITER)" />
       <TextLabel label="Titre" :text="props.title" />
       <TextLabel label="Album" :text="props.albumName" />
     </div>
@@ -27,7 +27,7 @@ const props = defineProps({
   display: flex;
 
   &--img {
-    width: 8rem;
+    width: 6rem;
   }
 
   &--text-wrapper {
